@@ -16,6 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+from home import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^$', views.main, name='main'),
+    url(r'^changeCourse/$', views.changeCourse),
+    url(r'^changeInstitute/$', views.changeInstitute),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

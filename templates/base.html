@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>엑셀 파싱 컨텐츠 제작 자동화 시스템</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+        var instituteNum, courseNum;
+
+        $(document).ready(function() {
+            instituteNum = {{ institute.id }};
+            courseNum = {{ course.id }};
+        });
+
+        function changeInstitutes(id)
+        {
+            instituteNum = id;
+
+            $.ajax({
+                url : '/changeInstitute/',
+                type : 'GET',
+                data : { instituteId : instituteNum,
+                         courseId : courseNum },
+                success : function(json) {
+                    $('#lecture_title').html('');
+                    $('#lecture_title').html(json.newInstituteName + " - " + json.newCourseName);
+
+                    courseNum = json.newCourseId;
+
+                    var data = JSON.parse(json.courses);
+                    var array = Object.keys(data).map(function(k) {
+                        return data[k];
+                    });
+
+                    $("#course_dropdown ul").html('');
+                    for ( var i = 0; i < array.length; i++)
+                    {
+                        var c = array[i];
+                        $("#course_dropdown ul").append('<li value="' + c.id + '" onclick="changeCourses(this.value);" style="cursor:Pointer;">'
+                                + (i + 1) + ' - ' + c.title + '</li>');
+                    }
+                },
+                error : function(json) {
+                    alert("error");
+                }
+            });
+        }
+
+        function changeCourses(id)
+        {
+            courseNum = id;
+
+            $.ajax({
+                url : '/changeCourse/',
+                type : 'GET',
+                data : { instituteId : instituteNum,
+                         courseId : courseNum },
+                success : function(json) {
+                    $('#lecture_title').html('');
+                    $('#lecture_title').html(json.newInstituteName + " - " + json.newCourseName);
+                },
+                error : function(json) {
+                    alert("error");
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">엑셀 파싱 컨텐츠 제작 자동화 시스템</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">기관<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
+                            {% for institute in institutes %}
+                                <li value="{{ institute.id }}" onclick="changeInstitutes(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ institute.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li id="course_dropdown" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">과정<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
+                            {% for course in courses %}
+                                <li value="{{ course.id }}" onclick="changeCourses(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ course.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="contents_container" class="container-fluid">
+        <h3 id="lecture_title">{{ institute.name }} - {{ course.title }}</h3>
+    </div>
+</body>
+</html>
