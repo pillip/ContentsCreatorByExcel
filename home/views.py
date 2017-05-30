@@ -14,7 +14,8 @@ def main(request):
                   { 'institute' : institute_list[0],
                     'course' : course_list[0],
                     'institutes' : institute_list,
-                    'courses' : course_list})
+                    'courses' : course_list,
+                    'numbers' : range(course_list[0].lectureNumbers) })
 
 def changeCourse(request):
     if request.method == 'GET' and request.is_ajax:
@@ -22,7 +23,8 @@ def changeCourse(request):
         course = Course.objects.get(id=request.GET['courseId'])
 
         dict = {'newInstituteName' : institute.name,
-                'newCourseName' : course.title }
+                'newCourseName' : course.title,
+                'numbers' : course.lectureNumbers }
 
         return HttpResponse(json.dumps(dict), content_type='application/json')
 
@@ -43,6 +45,7 @@ def changeInstitute(request):
         dict = {'newInstituteName' : institute.name,
                 'newCourseName' : course.title,
                 'newCourseId' : course.id,
+                'numbers' : course.lectureNumbers,
                 'courses' : json.dumps(courses) }
 
         return HttpResponse(json.dumps(dict), content_type='application/json')

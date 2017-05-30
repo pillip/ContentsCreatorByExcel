@@ -7,16 +7,19 @@
     <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script>
-        var instituteNum, courseNum;
+        var instituteNum, courseNum, lectureNum;
 
         $(document).ready(function() {
             instituteNum = {{ institute.id }};
             courseNum = {{ course.id }};
+            lectureNum = 1;
+            $("#lecture_title span").html(lectureNum + "차시");
         });
 
         function changeInstitutes(id)
         {
             instituteNum = id;
+            lectureNum = 1;
 
             $.ajax({
                 url : '/changeInstitute/',
@@ -25,7 +28,8 @@
                          courseId : courseNum },
                 success : function(json) {
                     $('#lecture_title').html('');
-                    $('#lecture_title').html(json.newInstituteName + " - " + json.newCourseName);
+                    $('#lecture_title').html(json.newInstituteName + "  -  " + json.newCourseName + "    <span></span>");
+                    $("#lecture_title span").html(lectureNum + "차시");
 
                     courseNum = json.newCourseId;
 
@@ -41,6 +45,13 @@
                         $("#course_dropdown ul").append('<li value="' + c.id + '" onclick="changeCourses(this.value);" style="cursor:Pointer;">'
                                 + (i + 1) + ' - ' + c.title + '</li>');
                     }
+
+                    $("#number_dropdown ul").html('');
+                    for ( var i = 0; i < json.numbers; i++)
+                    {
+                        $("#number_dropdown ul").append('<li value="' + (i + 1) + '" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">'
+                                + (i + 1) + ' 차시' + '</li>');
+                    }
                 },
                 error : function(json) {
                     alert("error");
@@ -51,6 +62,7 @@
         function changeCourses(id)
         {
             courseNum = id;
+            lectureNum = 1;
 
             $.ajax({
                 url : '/changeCourse/',
@@ -59,12 +71,27 @@
                          courseId : courseNum },
                 success : function(json) {
                     $('#lecture_title').html('');
-                    $('#lecture_title').html(json.newInstituteName + " - " + json.newCourseName);
+                    $('#lecture_title').html(json.newInstituteName + "  -  " + json.newCourseName + "    <span></span>");
+                    $("#lecture_title span").html(lectureNum + "차시");
+
+                    $("#number_dropdown ul").html('');
+                    for ( var i = 0; i < json.numbers; i++)
+                    {
+                        $("#number_dropdown ul").append('<li value="' + (i + 1) + '" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">'
+                                + (i + 1) + ' 차시' + '</li>');
+                    }
                 },
                 error : function(json) {
                     alert("error");
                 }
             });
+        }
+
+        function changeLectureNumbers(id)
+        {
+            lectureNum = id;
+            $("#lecture_title span").html('');
+            $("#lecture_title span").html(lectureNum + "차시");
         }
 
     </script>
@@ -93,12 +120,20 @@
                             {% endfor %}
                         </ul>
                     </li>
+                    <li id="number_dropdown" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">차시<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
+                            {% for n in numbers %}
+                                <li value="{{ forloop.counter }}" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">{{ forloop.counter }} 차시</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div id="contents_container" class="container-fluid">
-        <h3 id="lecture_title">{{ institute.name }} - {{ course.title }}</h3>
+        <h3 id="lecture_title">{{ institute.name }}  -  {{ course.title }}    <span></span></h3>
     </div>
 </body>
 </html>
