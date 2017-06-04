@@ -37,8 +37,18 @@ def parse(filename, instNum, courseNum, lectureNum):
         parsing13(workbook[u'13'])
     else:
         totalPage = course.pageNumDefault
+        lectureName = workbook[u'1']['B1'].value
 
-        pass
+        parsing6(workbook[u'1'], "01.html")
+        parsing7(workbook[u'2'], "02.html")
+        parsing8(workbook[u'3'], "03.html")
+        parsing9(workbook[u'4'], "04.html")
+        parsing10(workbook[u'5'], "05.html")
+        parsing11(workbook[u'6'], "06.html")
+        parsing12(workbook[u'7'], "07.html")
+        parsing12_prob(workbook, "07_2.html")
+        parsing13(workbook[u'8'], "08.html")
+
 
 def initialize(dict):
     global institute, course, lecture, totalPage, lectureName
@@ -210,7 +220,12 @@ def parsing6(worksheet, fn="06.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 6
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 6
+    else:
+        dict['currpage'] = 1
+
     dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
@@ -219,7 +234,12 @@ def parsing7(worksheet, fn="07.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 7
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 7
+    else:
+        dict['currpage'] = 2
+
     dict['time'] = worksheet['D1'].value
 
     dict['7video'] = worksheet['B1'].value
@@ -230,7 +250,12 @@ def parsing8(worksheet, fn="08.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 8
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 8
+    else:
+        dict['currpage'] = 3
+
     dict['time'] = worksheet['D1'].value
 
     dict['8problem'] = worksheet['B1'].value
@@ -243,7 +268,12 @@ def parsing9(worksheet, fn="09.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 9
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 9
+    else:
+        dict['currpage'] = 4
+
     dict['time'] = worksheet['D1'].value
 
     dict['9down1'] = worksheet['B1'].value
@@ -263,12 +293,17 @@ def parsing10(worksheet, fn="10.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 10
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 10
+    else:
+        dict['currpage'] = 5
+
     dict['time'] = worksheet['D1'].value
 
     n = int(worksheet['B1'].value)
     dict['10content'] = ''
-    for idx in range(2, n * 2, 2):
+    for idx in range(2, n * 2 + 1, 2):
         title = '<b>' + str(idx / 2) + '. ' + str(worksheet['B' + str(idx)].value) + '</b><br>'
 
         if worksheet['B' + str(idx + 1)].value == None:
@@ -284,7 +319,12 @@ def parsing11(worksheet, fn="11.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 11
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 11
+    else:
+        dict['currpage'] = 6
+
     dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
@@ -293,7 +333,12 @@ def parsing12(worksheet, fn="12.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 12
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 12
+    else:
+        dict['currpage'] = 7
+
     dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
@@ -302,10 +347,17 @@ def parsing12_prob(workbook, fn="12_2.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 12
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 12
+    else:
+        dict['currpage'] = 7
 
     for idx in range(1, 4):
-        worksheet = workbook['12_' + str(idx + 1)]
+        if lecture == 1:
+            worksheet = workbook['12_' + str(idx + 1)]
+        else:
+            worksheet = workbook['7_' + str(idx + 1)]
 
         flag = int(worksheet['B1'].value)
         dict['12problem' + str(idx)] = str(worksheet['B2'].value)
@@ -334,7 +386,12 @@ def parsing13(worksheet, fn="13.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 13
+    global lecture
+    if lecture == 1:
+        dict['currpage'] = 13
+    else:
+        dict['currpage'] = 8
+
     dict['time'] = worksheet['D1'].value
 
     dict['nextlecturename'] = str(worksheet['B1'].value)
