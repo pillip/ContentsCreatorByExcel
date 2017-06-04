@@ -74,7 +74,7 @@ def upload(request, institute, course, lecture):
 
         currCourse = Course.objects.get(id=course)
 
-        fileName = fs.save(currCourse.folderName + myfile.name, myfile)
+        fileName = fs.save(currCourse.folderName + '/result/' + myfile.name, myfile)
         uploaded_file_url = fs.url(fileName)
 
         print fileName

@@ -21,6 +21,9 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/media/dkfldkflfkd/templates/1" />
+        <option value="$MODULE_DIR$/media/dkfldkflfkd/templates/2" />
+        <option value="$MODULE_DIR$/media/dkfldkflfkd/templates" />
       </list>
     </option>
   </component>
