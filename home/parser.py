@@ -79,11 +79,41 @@ def writeFile(dict, fn):
         else:
             resultFile.write(line)
 
+def writeIncFile(dict, fn):
+    global lecture, course
+
+    templateDir = 2
+    if lecture == 1:
+        templateDir = 1
+
+    try:
+        os.remove(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + "/inc/" + fn)
+    except:
+        pass
+
+    templateFile = open(
+        settings.BASE_DIR + '/media/' + course.folderName + '/templates/' + '/inc/' + fn, "r")
+    resultFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + "/inc/" + fn, "w")
+    for line in templateFile:
+        if line.find('][') != -1:
+            newLine = line.split('][')
+            newLine[1] = str(dict[newLine[1]])
+
+            if len(newLine) >= 5:
+                newLine[3] = str(dict[newLine[3]])
+
+            newLine = ''.join(newLine)
+
+            resultFile.write(newLine)
+        else:
+            resultFile.write(line)
+
 def parsing1(worksheet, fn="01.html"):
     dict = {}
     initialize(dict)
 
     dict['currpage'] = 1
+    dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
 
@@ -92,6 +122,8 @@ def parsing2(worksheet, fn="02.html"):
     initialize(dict)
 
     dict['currpage'] = 2
+    dict['time'] = worksheet['D1'].value
+
     dict['profname'] = worksheet['B1'].value
 
     temp = str(worksheet['B2'].value).split('\n')
@@ -107,15 +139,19 @@ def parsing2(worksheet, fn="02.html"):
     dict['history'] = temp
 
     writeFile(dict, fn)
+    writeIncFile(dict, "teacher.html")
 
 def parsing3(worksheet, fn="03.html"):
     dict = {}
     initialize(dict)
 
     dict['currpage'] = 3
+    dict['time'] = worksheet['D1'].value
+
     dict['3video'] = worksheet['B1'].value
 
     writeFile(dict, fn)
+    writeIncFile(dict, "class.html")
 
 def parsing4(worksheet, fn="04.html"):
     global course
@@ -124,6 +160,7 @@ def parsing4(worksheet, fn="04.html"):
     initialize(dict)
 
     dict['currpage'] = 4
+    dict['time'] = worksheet['D1'].value
 
     week = 1
     lec = 1
@@ -158,12 +195,14 @@ def parsing4(worksheet, fn="04.html"):
     dict['righttable'] = temp
 
     writeFile(dict, fn)
+    writeIncFile(dict, "running.html")
 
 def parsing5(worksheet, fn="05.html"):
     dict = {}
     initialize(dict)
 
     dict['currpage'] = 5
+    dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
 
@@ -172,6 +211,7 @@ def parsing6(worksheet, fn="06.html"):
     initialize(dict)
 
     dict['currpage'] = 6
+    dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
 
@@ -180,6 +220,8 @@ def parsing7(worksheet, fn="07.html"):
     initialize(dict)
 
     dict['currpage'] = 7
+    dict['time'] = worksheet['D1'].value
+
     dict['7video'] = worksheet['B1'].value
 
     writeFile(dict, fn)
@@ -189,6 +231,8 @@ def parsing8(worksheet, fn="08.html"):
     initialize(dict)
 
     dict['currpage'] = 8
+    dict['time'] = worksheet['D1'].value
+
     dict['8problem'] = worksheet['B1'].value
     dict['8answer'] = worksheet['B2'].value
     dict['8explanation'] = worksheet['B3'].value
@@ -200,6 +244,8 @@ def parsing9(worksheet, fn="09.html"):
     initialize(dict)
 
     dict['currpage'] = 9
+    dict['time'] = worksheet['D1'].value
+
     dict['9down1'] = worksheet['B1'].value
     dict['9down2'] = worksheet['B2'].value
     dict['9down3'] = worksheet['B3'].value
@@ -218,6 +264,7 @@ def parsing10(worksheet, fn="10.html"):
     initialize(dict)
 
     dict['currpage'] = 10
+    dict['time'] = worksheet['D1'].value
 
     n = int(worksheet['B1'].value)
     dict['10content'] = ''
@@ -238,6 +285,7 @@ def parsing11(worksheet, fn="11.html"):
     initialize(dict)
 
     dict['currpage'] = 11
+    dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
 
@@ -246,6 +294,7 @@ def parsing12(worksheet, fn="12.html"):
     initialize(dict)
 
     dict['currpage'] = 12
+    dict['time'] = worksheet['D1'].value
 
     writeFile(dict, fn)
 
@@ -286,6 +335,7 @@ def parsing13(worksheet, fn="13.html"):
     initialize(dict)
 
     dict['currpage'] = 13
+    dict['time'] = worksheet['D1'].value
 
     dict['nextlecturename'] = str(worksheet['B1'].value)
     if int(dict['weeknum']) != 8 and int(dict['weeknum']) != 15 and int(dict['lecnum']) + 1 <= course.lectureNumbersPerWeek:
