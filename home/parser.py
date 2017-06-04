@@ -259,4 +259,19 @@ def parsing12_5(worksheet, fn="12_5.html"):
     pass
 
 def parsing13(worksheet, fn="13.html"):
-    pass
+    global course
+
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 13
+
+    dict['nextlecturename'] = str(worksheet['B1'].value)
+    if int(dict['weeknum']) != 8 and int(dict['weeknum']) != 15 and int(dict['lecnum']) + 1 <= course.lectureNumbersPerWeek:
+        dict['nextweeknum'] = dict['weeknum']
+        dict['nextlecnum'] = int(dict['lecnum']) + 1
+    else:
+        dict['nextweeknum'] = int(dict['weeknum']) + 1
+        dict['nextlecnum'] = 1
+
+    writeFile(dict, fn)
