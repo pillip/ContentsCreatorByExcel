@@ -179,10 +179,24 @@ def parsing6(worksheet, fn="06.html"):
     writeFile(dict, fn)
 
 def parsing7(worksheet, fn="07.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 7
+    dict['7video'] = worksheet['B1'].value
+
+    writeFile(dict, fn)
 
 def parsing8(worksheet, fn="08.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 7
+    dict['8problem'] = worksheet['B1'].value
+    dict['8answer'] = worksheet['B2'].value
+    dict['8explanation'] = worksheet['B3'].value
+
+    writeFile(dict, fn)
 
 def parsing9(worksheet, fn="09.html"):
     pass
