@@ -191,7 +191,7 @@ def parsing8(worksheet, fn="08.html"):
     dict = {}
     initialize(dict)
 
-    dict['currpage'] = 7
+    dict['currpage'] = 8
     dict['8problem'] = worksheet['B1'].value
     dict['8answer'] = worksheet['B2'].value
     dict['8explanation'] = worksheet['B3'].value
@@ -199,16 +199,58 @@ def parsing8(worksheet, fn="08.html"):
     writeFile(dict, fn)
 
 def parsing9(worksheet, fn="09.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 9
+    dict['9down1'] = worksheet['B1'].value
+    dict['9down2'] = worksheet['B2'].value
+    dict['9down3'] = worksheet['B3'].value
+    dict['9video'] = worksheet['B4'].value
+
+    temp = str(worksheet['B5'].value).split('\n')
+    for idx in range(len(temp)):
+        temp[idx] = '<li>' + temp[idx] + '</li>'
+    temp = ''.join(temp)
+    dict['9list'] = temp
+
+    writeFile(dict, fn)
 
 def parsing10(worksheet, fn="10.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 10
+
+    n = int(worksheet['B1'].value)
+    dict['10content'] = ''
+    for idx in range(2, n * 2, 2):
+        title = '<b>' + str(idx / 2) + '. ' + str(worksheet['B' + str(idx)].value) + '</b><br>'
+
+        if worksheet['B' + str(idx + 1)].value == None:
+            content = '<p></p><br>'
+        else:
+            content = '<p>' + str(worksheet['B' + str(idx + 1)].value) + '</p><br>'
+
+        dict['10content'] += title + content
+
+    writeFile(dict, fn)
 
 def parsing11(worksheet, fn="11.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 11
+
+    writeFile(dict, fn)
 
 def parsing12(worksheet, fn="12.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 12
+
+    writeFile(dict, fn)
 
 def parsing12_prob(worksheet, fn="12_2.html"):
     pass
