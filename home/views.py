@@ -7,6 +7,9 @@ from .models import Institute, Course
 import json
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from .parser import parse
+import shutil
+import os
 
 flag = 0
 
@@ -74,11 +77,18 @@ def upload(request, institute, course, lecture):
 
         currCourse = Course.objects.get(id=course)
 
+        try :
+            os.remove(settings.BASE_DIR + '/media/' + currCourse.folderName + '/result/' + myfile.name)
+        except:
+            pass
+
         fileName = fs.save(currCourse.folderName + '/result/' + myfile.name, myfile)
         uploaded_file_url = fs.url(fileName)
 
         print fileName
         print uploaded_file_url
+
+        parse(uploaded_file_url, institute, course, lecture)
 
         flag = 1
         return HttpResponseRedirect('/')
