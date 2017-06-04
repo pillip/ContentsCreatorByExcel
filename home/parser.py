@@ -1,3 +1,5 @@
+# -*- coding:UTF-8 -*-
+
 import openpyxl
 from django.conf import settings
 from .models import Institute, Course
@@ -17,8 +19,7 @@ def parse(filename, instNum, courseNum, lectureNum):
 
     if lecture == 1:
         totalPage = course.pageNumDefault + course.pageNumOT
-        lectureName = workbook[u'6']['B1']
-        print lectureName
+        lectureName = workbook[u'6']['B1'].value
 
         parsing1(workbook[u'1'])
         parsing2(workbook[u'2'])
@@ -49,19 +50,23 @@ def initialize(dict):
     dict['coursename'] = course.title
     dict['totalpage'] = totalPage
     dict['weeks'] = course.lectureNumbers / course.lectureNumbersPerWeek
-    dict['weeknum'] = (lecture - 1) / course.lectureNumbersPerWeek
+    dict['weeknum'] = (lecture - 1) / course.lectureNumbersPerWeek + 1
     dict['lecnum'] = (lecture - 1) % course.lectureNumbersPerWeek + 1
     dict['lecturename'] = lectureName
 
-def parsing1(worksheet, fn="01.html"):
-    global course
+def writeFile(dict, fn):
+    global lecture, course
 
-    dict = {}
-    dict['currpage'] = 1
-    initialize(dict)
+    templateDir = 2
+    if lecture == 1:
+        templateDir = 1
 
-    print settings.BASE_DIR + '/media/' + course.folderName + '/templates/1/' + fn
-    templateFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/templates/1/' + fn, "r")
+    try:
+        os.remove(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + str(lecture) + "/" + fn)
+    except:
+        pass
+
+    templateFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/templates/' + str(templateDir) + '/' + fn, "r")
     resultFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + str(lecture) + "/" + fn, "w")
     for line in templateFile:
         if line.find('][') != -1:
@@ -77,20 +82,101 @@ def parsing1(worksheet, fn="01.html"):
         else:
             resultFile.write(line)
 
+def parsing1(worksheet, fn="01.html"):
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 1
+
+    writeFile(dict, fn)
+
 def parsing2(worksheet, fn="02.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 2
+    dict['profname'] = worksheet['B1'].value
+
+    temp = str(worksheet['B2'].value).split('\n')
+    for idx in range(len(temp)):
+        temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
+    temp = ''.join(temp)
+    dict['studyhistory'] = temp
+
+    temp = str(worksheet['B3'].value).split('\n')
+    for idx in range(len(temp)):
+        temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
+    temp = ''.join(temp)
+    dict['history'] = temp
+
+    writeFile(dict, fn)
 
 def parsing3(worksheet, fn="03.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 3
+    dict['3video'] = worksheet['B1'].value
+
+    writeFile(dict, fn)
 
 def parsing4(worksheet, fn="04.html"):
-    pass
+    global course
+
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 4
+
+    week = 1
+    lec = 1
+    temp = str(worksheet['B1'].value).split('\n')
+    for idx in range(len(temp)):
+        temp[idx] = '<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td>' + temp[idx] + '</td></tr>'
+
+        lec += 1
+        if lec > course.lectureNumbersPerWeek:
+            week += 1
+            lec = 1
+    temp = ''.join(temp)
+    dict['lefttable'] = temp
+
+    week = 8
+    lec = 1
+    temp = str(worksheet['B2'].value).split('\n')
+    for idx in range(len(temp)):
+        if week == 8 or week == 15:
+            temp[idx] = '<tr><td>' + str(week) + '주차</td>' + '<td>' + temp[idx] + '</td></tr>'
+        else:
+            temp[idx] = '<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td>' + temp[idx] + '</td></tr>'
+
+        if week == 8 or week == 15:
+            lec = course.lectureNumbersPerWeek
+
+        lec += 1
+        if lec > course.lectureNumbersPerWeek:
+            week += 1
+            lec = 1
+    temp = ''.join(temp)
+    dict['righttable'] = temp
+
+    writeFile(dict, fn)
 
 def parsing5(worksheet, fn="05.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 5
+
+    writeFile(dict, fn)
 
 def parsing6(worksheet, fn="06.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 6
+
+    writeFile(dict, fn)
 
 def parsing7(worksheet, fn="07.html"):
     pass
