@@ -33,10 +33,7 @@ def parse(filename, instNum, courseNum, lectureNum):
         parsing10(workbook[u'10'])
         parsing11(workbook[u'11'])
         parsing12(workbook[u'12'])
-        parsing12_prob(workbook[u'12_2'])
-        parsing12_prob(workbook[u'12_3'], "12_3.html")
-        parsing12_prob(workbook[u'12_4'], "12_4.html")
-        parsing12_5(workbook[u'12_5'])
+        parsing12_prob(workbook)
         parsing13(workbook[u'13'])
     else:
         totalPage = course.pageNumDefault
@@ -252,14 +249,33 @@ def parsing12(worksheet, fn="12.html"):
 
     writeFile(dict, fn)
 
-def parsing12_prob(worksheet, fn="12_2.html"):
-    pass
-
-def parsing12_5(worksheet, fn="12_5.html"):
+def parsing12_prob(workbook, fn="12_2.html"):
     dict = {}
     initialize(dict)
 
     dict['currpage'] = 12
+
+    for idx in range(1, 4):
+        worksheet = workbook['12_' + str(idx + 1)]
+
+        flag = int(worksheet['B1'].value)
+        dict['12problem' + str(idx)] = str(worksheet['B2'].value)
+        dict['12example' + str(idx)] = str(worksheet['B3'].value)
+
+        if flag == 1: # 단답형
+            dict['12flag' + str(idx)] = '2'
+            onchangeFunc = ' onchange="changeText(' + str(idx) + ',' + "$('#answer" + str(idx) + "')" + '.val());"'
+            dict['12options' + str(idx)] = '<textarea id="answer' + str(idx) + '"' + onchangeFunc + ' class="p12_2_a3" placeholder="이곳에 정답을 입력하세요."></textarea>'
+        else: # 객관식
+            dict['12flag' + str(idx)] = '1'
+            temp = str(worksheet['B4'].value).split('\n')
+            for i in range(len(temp)):
+                temp[i] = '<li><a onclick="changeNum(' + str(idx) + ',' + str(i+1) + ');"' + '>' + str(i + 1) + ". " + temp[i] + '</a></li>'
+            temp = '<ul class="p12_2_v2">' + ''.join(temp) + '</ul>'
+            dict['12options' + str(idx)] = temp
+
+        dict['12answernum' + str(idx)] = str(worksheet['B5'].value)
+        dict['12answer' + str(idx)] = str(worksheet['B6'].value)
 
     writeFile(dict, fn)
 
