@@ -2,20 +2,35 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Institute, Course
 import json
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+flag = 0
 
 def main(request):
     institute_list = Institute.objects.all()
     course_list = institute_list[0].courses.all()
+
+    global  flag
+    msg = ''
+    if flag == 1:
+        msg = 'success'
+    elif flag == 2:
+        msg = 'fail'
+    flag = 0
+
+    print msg
 
     return render(request, 'base.html',
                   { 'institute' : institute_list[0],
                     'course' : course_list[0],
                     'institutes' : institute_list,
                     'courses' : course_list,
-                    'numbers' : range(course_list[0].lectureNumbers) })
+                    'numbers' : range(course_list[0].lectureNumbers),
+                    'msg' : msg})
 
 def changeCourse(request):
     if request.method == 'GET' and request.is_ajax:
@@ -49,3 +64,24 @@ def changeInstitute(request):
                 'courses' : json.dumps(courses) }
 
         return HttpResponse(json.dumps(dict), content_type='application/json')
+
+def upload(request, institute, course, lecture):
+    global flag
+
+    if request.method == 'POST' and 'myfile' in request.FILES:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+
+        currCourse = Course.objects.get(id=course)
+
+        fileName = fs.save(currCourse.folderName + myfile.name, myfile)
+        uploaded_file_url = fs.url(fileName)
+
+        print fileName
+        print uploaded_file_url
+
+        flag = 1
+        return HttpResponseRedirect('/')
+    else:
+        flag = 2
+        return HttpResponseRedirect('/')

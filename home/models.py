@@ -13,7 +13,9 @@ class Course(models.Model):
     title = models.CharField(max_length=100, null=False)
     lectureNumbers = models.IntegerField(null=False)
     folderName = models.CharField(max_length=20, null=False)
-
+    pageNumOT = models.IntegerField(default=5, null=False)
+    pageNumDefault = models.IntegerField(default=8, null=False)
+    lectureNumbersPerWeek = models.IntegerField(default=2, null=False)
 
     def __str__(self):
         return self.title + " lectureNumber : " + str(self.lectureNumbers)
@@ -28,10 +30,17 @@ class Institute(models.Model):
 
 def createDirectory(sender, **kwargs):
     course = kwargs['instance']
-    directoryName = 'result/' + course.folderName
 
+    directoryName = 'media/' + course.folderName
     absPath = os.path.abspath(directoryName)
+    makeDir(absPath)
 
+    directoryName = 'media/' + course.folderName + '/templates'
+    absPath = os.path.abspath(directoryName)
+    makeDir(absPath)
+
+    directoryName = 'media/' + course.folderName + '/result'
+    absPath = os.path.abspath(directoryName)
     makeDir(absPath)
 
     print absPath
