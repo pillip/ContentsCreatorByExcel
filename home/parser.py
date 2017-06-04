@@ -256,7 +256,12 @@ def parsing12_prob(worksheet, fn="12_2.html"):
     pass
 
 def parsing12_5(worksheet, fn="12_5.html"):
-    pass
+    dict = {}
+    initialize(dict)
+
+    dict['currpage'] = 12
+
+    writeFile(dict, fn)
 
 def parsing13(worksheet, fn="13.html"):
     global course
