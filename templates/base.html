@@ -19,6 +19,11 @@
             alert({{  msg }});
         });
 
+        function goPreview()
+        {
+            window.open("/media/{{ course.folderName }}/result/"+lectureNum+"/01.html", "_blank");
+        }
+
         function changeInstitutes(id)
         {
             instituteNum = id;
@@ -149,7 +154,8 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <input type="file" class="form-control-static" name="myfile">
-                    <button type="submit" class="form-control">업로드</button>
+                    <button type="submit" class="btn btn-default" onclick="goPreview();">미리보기</button>
+                    <button type="submit" class="btn btn-default">업로드</button>
                 </div>
             </form>
         </div>
