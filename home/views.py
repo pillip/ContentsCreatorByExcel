@@ -11,29 +11,34 @@ from .parser import parse
 import shutil
 import os
 
-flag = 0
-
 def main(request):
     institute_list = Institute.objects.all()
     course_list = institute_list[0].courses.all()
 
-    global  flag
-    msg = ''
-    if flag == 1:
-        msg = 'success'
-    elif flag == 2:
-        msg = 'fail'
-    flag = 0
-
-    print msg
-
     return render(request, 'base.html',
                   { 'institute' : institute_list[0],
                     'course' : course_list[0],
+                    'lecture' : 1,
                     'institutes' : institute_list,
                     'courses' : course_list,
-                    'numbers' : range(course_list[0].lectureNumbers),
-                    'msg' : msg})
+                    'numbers' : range(course_list[0].lectureNumbers)})
+
+def complete(request, institute, course, lecture):
+    institute_list = Institute.objects.all()
+    course_list = Institute.objects.get(id=institute).courses.all()
+    lecture = int(lecture)
+
+    if lecture + 1 <= Course.objects.get(id=course).lectureNumbers:
+        lecture += 1
+
+    return render(request, 'base.html',
+                  { 'institute' : Institute.objects.get(id=institute),
+                    'course' : Course.objects.get(id=course),
+                    'lecture' : lecture,
+                    'institutes' : institute_list,
+                    'courses' : course_list,
+                    'numbers' : range(Course.objects.get(id=course).lectureNumbers),
+                    'msg' : 'Parsing Complete'})
 
 def changeCourse(request):
     if request.method == 'GET' and request.is_ajax:
@@ -69,8 +74,6 @@ def changeInstitute(request):
         return HttpResponse(json.dumps(dict), content_type='application/json')
 
 def upload(request, institute, course, lecture):
-    global flag
-
     if request.method == 'POST' and 'myfile' in request.FILES:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
@@ -90,8 +93,6 @@ def upload(request, institute, course, lecture):
 
         parse(uploaded_file_url, institute, course, lecture)
 
-        flag = 1
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/complete/'+institute+"/"+course+"/"+lecture)
     else:
-        flag = 2
         return HttpResponseRedirect('/')

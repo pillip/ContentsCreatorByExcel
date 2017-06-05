@@ -12,11 +12,13 @@
         $(document).ready(function() {
             instituteNum = {{ institute.id }};
             courseNum = {{ course.id }};
-            lectureNum = 1;
-            $("#lecture_title span").html(lectureNum + "차시");
+            lectureNum = {{ lecture }};
+            $("#lecture_title span").html(lectureNum.toString() + "차시");
             $("#upload_form").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
 
-            alert({{  msg }});
+            {% if msg %}
+                alert("{{ msg }}");
+            {% endif %}
         });
 
         function goPreview()
