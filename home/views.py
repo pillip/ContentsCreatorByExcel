@@ -18,28 +18,24 @@ def main(request):
     return render(request, 'base.html',
                   { 'institute' : institute_list[0],
                     'course' : course_list[0],
-                    'lecture' : 1,
                     'institutes' : institute_list,
                     'courses' : course_list,
                     'numbers' : range(course_list[0].lectureNumbers)})
 
-def complete(request, institute, course, lecture):
+def complete(request, institute, course = -1, lecture = -1):
     print "in complete"
     institute_list = Institute.objects.all()
     course_list = Institute.objects.get(id=institute).courses.all()
-    lecture = int(lecture)
 
-    if lecture + 1 <= Course.objects.get(id=course).lectureNumbers:
-        lecture += 1
+    if course == -1:
+        course = course_list[0].id
 
     return render(request, 'base.html',
                   { 'institute' : Institute.objects.get(id=institute),
                     'course' : Course.objects.get(id=course),
-                    'lecture' : lecture,
                     'institutes' : institute_list,
                     'courses' : course_list,
-                    'numbers' : range(Course.objects.get(id=course).lectureNumbers),
-                    'msg' : 'Parsing Complete'})
+                    'numbers' : range(Course.objects.get(id=course).lectureNumbers)})
 
 def changeCourse(request):
     if request.method == 'GET' and request.is_ajax:
@@ -94,7 +90,7 @@ def upload(request, institute, course, lecture):
 
         parse(uploaded_file_url, institute, course, lecture)
 
-        return HttpResponseRedirect('/complete/'+institute+"/"+course+"/"+lecture)
+        return HttpResponseRedirect('/')
     else:
         print "???  "
         return HttpResponseRedirect('/')

@@ -18,24 +18,20 @@
         $(document).ready(function() {
             instituteNum = {{ institute.id }};
             courseNum = {{ course.id }};
-            lectureNum = {{ lecture }};
-            $("#lecture_title span").html(lectureNum.toString() + "차시");
-            $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
 
             {% if msg %}
                 alert("{{ msg }}");
             {% endif %}
         });
 
-        function goPreview()
+        function goPreview(val)
         {
-            window.open("/media/{{ course.folderName }}/result/"+lectureNum+"/01.html", "_blank");
+            window.open("/media/{{ course.folderName }}/result/"+val+"/01.html", "_blank");
         }
 
         function changeInstitutes(id)
         {
             instituteNum = id;
-            lectureNum = 1;
 
             $.ajax({
                 url : '/changeInstitute/',
@@ -45,7 +41,6 @@
                 success : function(json) {
                     $('#lecture_title').html('');
                     $('#lecture_title').html(json.newInstituteName + "  -  " + json.newCourseName + "    <span></span>");
-                    $("#lecture_title span").html(lectureNum + "차시");
 
                     courseNum = json.newCourseId;
 
@@ -55,21 +50,11 @@
                     });
 
                     $("#course_dropdown ul").html('');
-                    for ( var i = 0; i < array.length; i++)
-                    {
+                    for ( var i = 0; i < array.length; i++) {
                         var c = array[i];
                         $("#course_dropdown ul").append('<li value="' + c.id + '" onclick="changeCourses(this.value);" style="cursor:Pointer;">'
                                 + (i + 1) + ' - ' + c.title + '</li>');
                     }
-
-                    $("#number_dropdown ul").html('');
-                    for ( var i = 0; i < json.numbers; i++)
-                    {
-                        $("#number_dropdown ul").append('<li value="' + (i + 1) + '" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">'
-                                + (i + 1) + ' 차시' + '</li>');
-                    }
-
-                    $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
                 },
                 error : function(json) {
                     alert("error");
@@ -80,7 +65,6 @@
         function changeCourses(id)
         {
             courseNum = id;
-            lectureNum = 1;
 
             $.ajax({
                 url : '/changeCourse/',
@@ -90,30 +74,11 @@
                 success : function(json) {
                     $('#lecture_title').html('');
                     $('#lecture_title').html(json.newInstituteName + "  -  " + json.newCourseName + "    <span></span>");
-                    $("#lecture_title span").html(lectureNum + "차시");
-
-                    $("#number_dropdown ul").html('');
-                    for ( var i = 0; i < json.numbers; i++)
-                    {
-                        $("#number_dropdown ul").append('<li value="' + (i + 1) + '" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">'
-                                + (i + 1) + ' 차시' + '</li>');
-                    }
-
-                    $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
                 },
                 error : function(json) {
                     alert("error");
                 }
             });
-        }
-
-        function changeLectureNumbers(id)
-        {
-            lectureNum = id;
-            $("#lecture_title span").html('');
-            $("#lecture_title span").html(lectureNum + "차시");
-
-            $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
         }
 
     </script>
@@ -130,7 +95,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">기관<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
                             {% for institute in institutes %}
-                                <li value="{{ institute.id }}" onclick="changeInstitutes(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ institute.name }}</li>
+                                <li value="{{ institute.id }}" onclick="location.href='/complete/{{ institute.id }}/';" style="cursor:Pointer;">{{ forloop.counter }} - {{ institute.name }}</li>
+                                <!--<li value="{{ institute.id }}" onclick="changeInstitutes(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ institute.name }}</li>-->
                             {% endfor %}
                         </ul>
                     </li>
@@ -138,15 +104,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">과정<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
                             {% for course in courses %}
-                                <li value="{{ course.id }}" onclick="changeCourses(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ course.title }}</li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    <li id="number_dropdown" class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" area-expand="false">차시<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu" style="min-width: 200px;">
-                            {% for n in numbers %}
-                                <li value="{{ forloop.counter }}" onclick="changeLectureNumbers(this.value);" style="cursor:Pointer;">{{ forloop.counter }} 차시</li>
+                                <li value="{{ course.id }}" onclick="location.href='/complete/{{ institute.id}}/{{ course.id }}/';" style="cursor:Pointer;">{{ forloop.counter }} - {{ course.title }}</li>
+                                <!--<li value="{{ course.id }}" onclick="changeCourses(this.value);" style="cursor:Pointer;">{{ forloop.counter }} - {{ course.title }}</li>-->
                             {% endfor %}
                         </ul>
                     </li>
@@ -155,45 +114,34 @@
         </div>
     </nav>
     <div id="contents_container" class="container-fluid">
-        <h3 id="lecture_title">{{ institute.name }}  -  {{ course.title }}    <span></span></h3>
+        <h3 id="lecture_title">{{ institute.name }}  -  {{ course.title }}</h3>
         <div id="form_wrapper">
-            <!--<fieldset>
-                <legned>File Upload</legned>
-                <form id="upload_form" action="/upload/" method="post" enctype="multipart/form-data">
+
+            {% for idx in numbers %}
+                <form id="my_dropzone{{ forloop.counter }}" action="/upload/{{ institute.id }}/{{ course.id }}/{{ forloop.counter }}" method="post" class="dropzone" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div>
-                        <label for="fileselect">Files to upload:</label>
-                        <input class="from-control-static" type="file" id="fileselect" name="myfile">
-                        <div id="filedrag">drop files here</div>
-                    </div>
-                    <div class="submitbutton">
-                        <button type="submit" class="btn btn-default" onclick="goPreview();">미리보기</button>
+                    <strong>{{ forloop.counter }} 차시</strong>
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-default" onclick="goPreview({{ forloop.counter }});">미리보기</button>
                         <button type="submit" class="btn btn-default">업로드</button>
                     </div>
                 </form>
-            </fieldset>-->
-            <form id="my_dropzone" action="/upload/" method="post" class="dropzone" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="submitbutton">
-                    <button type="submit" class="btn btn-default" onclick="goPreview();">미리보기</button>
-                    <button id="submit" type="submit" class="btn btn-default">업로드</button>
-                </div>
-            </form>
 
-            <script>
-                Dropzone.options.myDropzone = {
-                    maxFiles : 1,
+                <script>
+                    Dropzone.options.myDropzone{{ forloop.counter }} = {
+                        maxFiles : 1,
 
-                    init : function() {
-                        myDropzone = this;
+                        init : function() {
+                            myDropzone{{ forloop.counter }} = this;
 
-                        myDropzone.on("maxfilesexceeded", function(file) {
-                            myDropzone.removeAllFiles();
-                            myDropzone.addFile(file);
-                        });
-                    }
-                };
-            </script>
+                            myDropzone{{ forloop.counter }}.on("maxfilesexceeded", function(file) {
+                                myDropzone{{ forloop.counter }}.removeAllFiles();
+                                myDropzone{{ forloop.counter }}.addFile(file);
+                            });
+                        }
+                    };
+                </script>
+            {% endfor %}
         </div>
     </div>
 </body>
