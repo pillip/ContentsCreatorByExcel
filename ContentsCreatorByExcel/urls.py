@@ -28,4 +28,4 @@ urlpatterns = [
     url(r'^changeInstitute/$', views.changeInstitute),
     url(r'^upload/(?P<institute>\d+)/(?P<course>\d+)/(?P<lecture>\d+)/$', views.upload),
     url(r'^complete/(?P<institute>\d+)/(?P<course>\d+)/(?P<lecture>\d+)/$', views.complete),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

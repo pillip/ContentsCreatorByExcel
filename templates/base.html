@@ -1,11 +1,17 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>엑셀 파싱 컨텐츠 제작 자동화 시스템</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'base/basic.css' %}" />
+    <link rel="stylesheet" href="{% static 'base/dropzone.css' %}" />
+    <script type="text/javascript" src="{% static 'base/dropzone.js' %}"></script>
+
     <script>
         var instituteNum, courseNum, lectureNum;
 
@@ -14,7 +20,7 @@
             courseNum = {{ course.id }};
             lectureNum = {{ lecture }};
             $("#lecture_title span").html(lectureNum.toString() + "차시");
-            $("#upload_form").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
+            $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
 
             {% if msg %}
                 alert("{{ msg }}");
@@ -63,7 +69,7 @@
                                 + (i + 1) + ' 차시' + '</li>');
                     }
 
-                    $("#upload_form").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
+                    $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
                 },
                 error : function(json) {
                     alert("error");
@@ -93,7 +99,7 @@
                                 + (i + 1) + ' 차시' + '</li>');
                     }
 
-                    $("#upload_form").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
+                    $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
                 },
                 error : function(json) {
                     alert("error");
@@ -107,7 +113,7 @@
             $("#lecture_title span").html('');
             $("#lecture_title span").html(lectureNum + "차시");
 
-            $("#upload_form").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
+            $("#my_dropzone").attr("action", "/upload/"+instituteNum+"/"+courseNum+"/"+lectureNum+"/");
         }
 
     </script>
@@ -150,21 +156,45 @@
     </nav>
     <div id="contents_container" class="container-fluid">
         <h3 id="lecture_title">{{ institute.name }}  -  {{ course.title }}    <span></span></h3>
-
         <div id="form_wrapper">
-            <form id="upload_form" action="/upload/" method="post" enctype="multipart/form-data">
+            <!--<fieldset>
+                <legned>File Upload</legned>
+                <form id="upload_form" action="/upload/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <label for="fileselect">Files to upload:</label>
+                        <input class="from-control-static" type="file" id="fileselect" name="myfile">
+                        <div id="filedrag">drop files here</div>
+                    </div>
+                    <div class="submitbutton">
+                        <button type="submit" class="btn btn-default" onclick="goPreview();">미리보기</button>
+                        <button type="submit" class="btn btn-default">업로드</button>
+                    </div>
+                </form>
+            </fieldset>-->
+            <form id="my_dropzone" action="/upload/" method="post" class="dropzone" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <input type="file" class="form-control-static" name="myfile">
+                <div class="submitbutton">
                     <button type="submit" class="btn btn-default" onclick="goPreview();">미리보기</button>
-                    <button type="submit" class="btn btn-default">업로드</button>
+                    <button id="submit" type="submit" class="btn btn-default">업로드</button>
                 </div>
             </form>
-        </div>
 
-        {% if uploaded_file_url %}
-            <p>File uploaded at: {{ uploaded_file_url }}</p>
-        {% endif %}
+            <script>
+                Dropzone.options.myDropzone = {
+                    maxFiles : 1,
+
+                    init : function() {
+                        myDropzone = this;
+
+                        myDropzone.on("maxfilesexceeded", function(file) {
+                            myDropzone.removeAllFiles();
+                            myDropzone.addFile(file);
+                        });
+                    }
+                };
+            </script>
+        </div>
     </div>
 </body>
 </html>

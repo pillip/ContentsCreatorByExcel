@@ -24,6 +24,7 @@ def main(request):
                     'numbers' : range(course_list[0].lectureNumbers)})
 
 def complete(request, institute, course, lecture):
+    print "in complete"
     institute_list = Institute.objects.all()
     course_list = Institute.objects.get(id=institute).courses.all()
     lecture = int(lecture)
@@ -74,8 +75,8 @@ def changeInstitute(request):
         return HttpResponse(json.dumps(dict), content_type='application/json')
 
 def upload(request, institute, course, lecture):
-    if request.method == 'POST' and 'myfile' in request.FILES:
-        myfile = request.FILES['myfile']
+    if request.method == 'POST' and 'file' in request.FILES:
+        myfile = request.FILES['file']
         fs = FileSystemStorage()
 
         currCourse = Course.objects.get(id=course)
@@ -95,4 +96,5 @@ def upload(request, institute, course, lecture):
 
         return HttpResponseRedirect('/complete/'+institute+"/"+course+"/"+lecture)
     else:
+        print "???  "
         return HttpResponseRedirect('/')
