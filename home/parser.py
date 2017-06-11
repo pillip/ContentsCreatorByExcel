@@ -136,17 +136,19 @@ def parsing2(worksheet, fn="02.html"):
 
     dict['profname'] = worksheet['B1'].value
 
-    temp = str(worksheet['B2'].value).split('\n')
-    for idx in range(len(temp)):
-        temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
-    temp = ''.join(temp)
-    dict['studyhistory'] = temp
+    #temp = str(worksheet['B2'].value).split('\n')
+    #for idx in range(len(temp)):
+    #    temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
+    #temp = ''.join(temp)
+    #dict['studyhistory'] = temp
+    dict['studyhistory'] = str(worksheet['B2'].value)
 
-    temp = str(worksheet['B3'].value).split('\n')
-    for idx in range(len(temp)):
-        temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
-    temp = ''.join(temp)
-    dict['history'] = temp
+    #temp = str(worksheet['B3'].value).split('\n')
+    #for idx in range(len(temp)):
+    #    temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
+    #temp = ''.join(temp)
+    #dict['history'] = temp
+    dict['history'] = str(worksheet['B3'].value)
 
     writeFile(dict, fn)
     writeIncFile(dict, "teacher.html")
