@@ -12,6 +12,9 @@
        <script>
         $(function() {
              //changeReadyState();
+
+            if ( '][12example1][' == 'None' )
+                $('#example1').css('display','none');
         });
     </script>
 
@@ -39,6 +42,9 @@
 
             $('#p12_prob_1').css('display','none');
             $('#p12_prob_2').css('display','block');
+
+            if ( '][12example2][' == 'None' )
+                $('#example2').css('display','none');
         }
 
         function nextBtn2() {
@@ -60,6 +66,9 @@
 
             $('#p12_prob_2').css('display','none');
             $('#p12_prob_3').css('display','block');
+
+            if ( '][12example3][' == 'None' )
+                $('#example3').css('display','none');
         }
 
         function nextBtn3() {
@@ -203,7 +212,7 @@
         <div class="p12_2_q"><pre>][12problem1][</pre></div>
 
 	<!-- 보기 1 -->
-	<div class="p12_2_v1">
+	<div id="example1" class="p12_2_v1">
             <pre>][12example1][</pre>
 	</div>
 
@@ -231,7 +240,7 @@
         <div class="p12_2_q"><pre>][12problem2][</pre></div>
 
 	<!-- 보기 1 -->
-	<div class="p12_2_v1">
+	<div id="example2" class="p12_2_v1">
             <pre>][12example2][</pre>
 	</div>
 
@@ -259,7 +268,7 @@
         <div class="p12_2_q"><pre>][12problem3][</pre></div>
 
 	<!-- 보기 1 -->
-	<div class="p12_2_v1">
+	<div id="example3" class="p12_2_v1">
             <pre>][12example3][</pre>
 	</div>
 
