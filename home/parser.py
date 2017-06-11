@@ -301,9 +301,9 @@ def parsing10(worksheet, fn="10.html"):
         title = '<b>' + str(idx / 2) + '. ' + str(worksheet['B' + str(idx)].value) + '</b><br>'
 
         if worksheet['B' + str(idx + 1)].value == None:
-            content = '<p></p><br>'
+            content = '<pre></pre><br>'
         else:
-            content = '<p>' + str(worksheet['B' + str(idx + 1)].value) + '</p><br>'
+            content = '<pre>' + str(worksheet['B' + str(idx + 1)].value) + '</pre><br>'
 
         dict['10content'] += title + content
 
