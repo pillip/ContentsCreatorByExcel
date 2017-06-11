@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^$', views.main, name='main'),
     url(r'^changeCourse/$', views.changeCourse),
     url(r'^changeInstitute/$', views.changeInstitute),
-    url(r'^upload/(?P<institute>\d+)/(?P<course>\d+)/(?P<lecture> \d+)/$', views.upload),
+    url(r'^upload/(?P<institute>\d+)/(?P<course>\d+)/(?P<lecture>\d+)/$', views.upload),
     url(r'^complete/(?P<institute>\d+)/(?P<course>\d+)/(?P<lecture>\d+)/$', views.complete),
     url(r'^complete/(?P<institute>\d+)/$', views.complete),
     url(r'^complete/(?P<institute>\d+)/(?P<course>\d+)/$', views.complete),
