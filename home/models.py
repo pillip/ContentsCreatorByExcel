@@ -47,6 +47,10 @@ def createDirectory(sender, **kwargs):
     absPath = os.path.abspath(directoryName)
     makeDir(absPath)
 
+    directoryName = 'media/' + course.folderName + '/templates/inc'
+    absPath = os.path.abspath(directoryName)
+    makeDir(absPath)
+
     directoryName = 'media/' + course.folderName + '/result'
     absPath = os.path.abspath(directoryName)
     makeDir(absPath)
@@ -56,7 +60,11 @@ def createDirectory(sender, **kwargs):
     makeDir(absPath)
 
     for n in range(course.lectureNumbers):
-        directoryName = 'media/' + course.folderName + '/result/' + str(n+1)
+        if n + 1 < 10:
+            directoryName = 'media/' + course.folderName + '/result/0' + str(n + 1)
+        else:
+            directoryName = 'media/' + course.folderName + '/result/' + str(n+1)
+
         absPath = os.path.abspath(directoryName)
         makeDir(absPath)
 
