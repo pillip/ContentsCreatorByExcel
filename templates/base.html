@@ -131,8 +131,6 @@
                             {% for file in files %}
                                 {% if file.lectureNumber == lec %}
                                     <a class="btn btn-default" href="{{ file.filePath }}" download>다운로드</a>
-                                {% else %}
-                                    <a class="btn btn-default" download>다운로드</a>
                                 {% endif %}
                             {%  endfor %}
                         {% endwith %}
