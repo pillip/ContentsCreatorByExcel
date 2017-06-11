@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
+    <script src="../js/printThis.js"></script>
        <script>
         $(function() {
             $('html').keydown(function(e) {
@@ -28,6 +29,18 @@
 
             setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
         });
+
+        function printDocument()
+        {
+            $('.p10_text').printThis({
+                debug: false,
+                importCSS: true,
+                printContainer: true,
+                loadCSS: "../css/style.css",
+                pageTitle: "][coursename][ - ][lecturename][",
+                removeinline: false
+            });
+        }
     </script>
 
 </head>
@@ -101,7 +114,7 @@
 
 <!-- 내용 -->
 <div class="p10_t">* 이번 시간에 학습한 내용을 다시 한번 정리해 보세요.</div>
-<div class="p10_print"><a href="#">인쇄하기 ▶</a></div>
+<div class="p10_print"><a onclick="printDocument();" style="cursor:pointer;">인쇄하기 ▶</a></div>
 <div class="p10_text">
     ][10content][
 </div>
