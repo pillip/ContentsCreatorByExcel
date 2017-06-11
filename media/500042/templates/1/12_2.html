@@ -21,14 +21,20 @@
         var answer1 = '', answer2 = '', answer3 = '';
 
         function nextBtn1() {
-            if ( answer1.toString() == '][12answernum1][' )
+            var answers = '][12answernum1]['.split('/');
+
+            for ( var i in answers )
             {
-                countCorrect++;
-                src1 = '../img/o_o.png';
-            }
-            else
-            {
-                src1 = '../img/x_o.png';
+                if ( answer1.toString() == answers[i] )
+                {
+                    countCorrect++;
+                    src1 = '../img/o_o.png';
+                    break;
+                }
+                else
+                {
+                    src1 = '../img/x_o.png';
+                }
             }
 
             $('#p12_prob_1').css('display','none');
@@ -36,14 +42,20 @@
         }
 
         function nextBtn2() {
-            if ( answer2.toString() == '][12answernum2][' )
+            var answers = '][12answernum2]['.split('/');
+
+            for ( var i in answers )
             {
-                countCorrect++;
-                src2 = '../img/o_o.png';
-            }
-            else
-            {
-                src2 = '../img/x_o.png';
+                if ( answer2.toString() == answers[i] )
+                {
+                    countCorrect++;
+                    src2 = '../img/o_o.png';
+                    break;
+                }
+                else
+                {
+                    src2 = '../img/x_o.png';
+                }
             }
 
             $('#p12_prob_2').css('display','none');
@@ -51,14 +63,20 @@
         }
 
         function nextBtn3() {
-            if ( answer3.toString() == '][12answernum3][' )
+            var answers = '][12answernum3]['.split('/');
+
+            for ( var i in answers )
             {
-                countCorrect++;
-                src3 = '../img/o_o.png';
-            }
-            else
-            {
-                src3 = '../img/x_o.png';
+                if ( answer3.toString() == answers[i] )
+                {
+                    countCorrect++;
+                    src3 = '../img/o_o.png';
+                    break;
+                }
+                else
+                {
+                    src3 = '../img/x_o.png';
+                }
             }
 
             $('#p12_prob_3').css('display','none');
