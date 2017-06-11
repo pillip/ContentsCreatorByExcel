@@ -26,6 +26,9 @@
 
         function goPreview(val)
         {
+            if ( val < 10 )
+                val = '0' + val.toString();
+
             window.open("/media/{{ course.folderName }}/result/"+val+"/01.html", "_blank");
         }
 
@@ -124,6 +127,15 @@
                     <div class="buttons">
                         <a class="btn btn-default" onclick="goPreview({{ forloop.counter }});">미리보기</a>
                         <button type="submit" class="btn btn-default">업로드</button>
+                        {% with lec=forloop.counter %}
+                            {% for file in files %}
+                                {% if file.lectureNumber == lec %}
+                                    <a class="btn btn-default" href="{{ file.filePath }}" download>다운로드</a>
+                                {% else %}
+                                    <a class="btn btn-default" download>다운로드</a>
+                                {% endif %}
+                            {%  endfor %}
+                        {% endwith %}
                     </div>
                 </form>
 

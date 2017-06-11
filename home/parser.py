@@ -74,7 +74,12 @@ def writeFile(dict, fn):
         pass
 
     templateFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/templates/' + str(templateDir) + '/' + fn, "r")
-    resultFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + str(lecture) + "/" + fn, "w")
+
+    if int(lecture) < 10:
+        resultFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/result/0' + str(lecture) + "/" + fn, "w")
+    else:
+        resultFile = open(settings.BASE_DIR + '/media/' + course.folderName + '/result/' + str(lecture) + "/" + fn, "w")
+
     for line in templateFile:
         if line.find('][') != -1:
             newLine = line.split('][')

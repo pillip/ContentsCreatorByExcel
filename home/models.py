@@ -28,6 +28,11 @@ class Institute(models.Model):
     def __str__(self):
         return self.name
 
+class UploadedFile(models.Model):
+    filePath = models.FilePathField(null=False)
+    lectureNumber = models.IntegerField(null=False)
+    courseNumber = models.IntegerField(null=False)
+
 def createDirectory(sender, **kwargs):
     course = kwargs['instance']
 

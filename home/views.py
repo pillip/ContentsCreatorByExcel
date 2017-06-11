@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Institute, Course
+from .models import Institute, Course, UploadedFile
 import json
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -14,13 +14,16 @@ import os
 def main(request):
     institute_list = Institute.objects.all()
     course_list = institute_list[0].courses.all()
+    file_list = UploadedFile.objects.filter(courseNumber=course_list[0].id)
+    print file_list
 
     return render(request, 'base.html',
                   { 'institute' : institute_list[0],
                     'course' : course_list[0],
                     'institutes' : institute_list,
                     'courses' : course_list,
-                    'numbers' : range(course_list[0].lectureNumbers)})
+                    'numbers' : range(course_list[0].lectureNumbers),
+                    'files' : file_list})
 
 def complete(request, institute, course = -1, lecture = -1):
     print "in complete"
@@ -30,12 +33,16 @@ def complete(request, institute, course = -1, lecture = -1):
     if course == -1:
         course = course_list[0].id
 
+    file_list = UploadedFile.objects.filter(courseNumber=course)
+    print file_list
+
     return render(request, 'base.html',
                   { 'institute' : Institute.objects.get(id=institute),
                     'course' : Course.objects.get(id=course),
                     'institutes' : institute_list,
                     'courses' : course_list,
-                    'numbers' : range(Course.objects.get(id=course).lectureNumbers)})
+                    'numbers' : range(Course.objects.get(id=course).lectureNumbers),
+                    'files' : file_list})
 
 def changeCourse(request):
     if request.method == 'GET' and request.is_ajax:
@@ -77,10 +84,10 @@ def upload(request, institute, course, lecture):
 
         currCourse = Course.objects.get(id=course)
 
-        try :
-            os.remove(settings.BASE_DIR + '/media/' + currCourse.folderName + '/result/' + myfile.name)
-        except:
-            pass
+        #try :
+        #    os.remove(settings.BASE_DIR + '/media/' + currCourse.folderName + '/result/' + myfile.name)
+        #except:
+        #    pass
 
         fileName = fs.save(currCourse.folderName + '/result/' + myfile.name, myfile)
         uploaded_file_url = fs.url(fileName)
@@ -88,9 +95,18 @@ def upload(request, institute, course, lecture):
         print fileName
         print uploaded_file_url
 
+        uploadedFile = UploadedFile.objects.filter(lectureNumber=int(lecture)).filter(courseNumber=int(course)).first()
+
+        if not uploadedFile:
+            uploadedFile = UploadedFile()
+
+        uploadedFile.filePath = uploaded_file_url
+        uploadedFile.lectureNumber = int(lecture)
+        uploadedFile.courseNumber = int(course)
+        uploadedFile.save()
+
         parse(uploaded_file_url, institute, course, lecture)
 
         return HttpResponseRedirect('/')
     else:
-        print "???  "
         return HttpResponseRedirect('/')
