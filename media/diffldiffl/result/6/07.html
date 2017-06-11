@@ -1,0 +1,126 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>서울사이버에듀</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewpor​t" content="width-device-width,initial-scale=1, user-scalable=no" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="../js/common.js"></script>
+       <script>
+        $(function() {
+            $('html').keydown(function(e) {
+                var key = e.which;
+                switch(key) {
+                    case 37:
+                        goPrevPage(7,8);
+                        break;
+                    case 39:
+                        goNextPage(7,8);
+                        break;
+                }
+            });
+
+            setTimeout("$('.f_next').css('display','block');  changeReadyState();", 3 * 1000);
+        });
+    </script>
+</head>
+<body id="p12">
+<!-- gnb -->
+<div class="menu2">
+	<ul>
+		<li>
+			<a href="#" class="menu_btn">=== MENU ===</a>
+			<ul>
+				<li>
+					<dl>
+						<dt>시작하기</dt>
+						<dd><a href="01.html">- 인트로</a></dd>
+						<dd><a href="02.html">- 학습목표&학습내용</a></dd>
+						<dd><a href="03.html">- 사전학습</a></dd>
+						<dd>&nbsp;</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><a href="04.html">학습하기</a></dt>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>정리하기</dt>
+						<dd><a href="05.html">- 요약정리</a></dd>
+						<dd><a href="06.html">- 학습노트</a></dd>
+						<dd><a href="07.html">- 형성평가</a></dd>
+						<dd><a href="08.html">- 차시예고</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!-- gnb end -->
+
+
+<!-- top 차시명 & 강의명 -->
+<div class="t_class">
+	<div class="t_cass_t">◆ 얄리얄리</div>
+
+	<div class="t_th">
+		<div class="th">3주차 2차시</div>
+		<div class="name">사회과학과 경영통계2</div>
+	</div>
+	<div class="t_now"><span>정리하기 | </span>형성평가</div>
+</div>
+
+
+
+<!-- 내용 -->
+<div class="p12_1_text">
+	학습한 내용을 기반으로 퀴즈를<br/>
+	풀어 보도록 하겠습니다.<br/>
+	문제를 잘 읽고 보기에서 알맞은 답을 고르세요. <br/>
+	기회는 <span>두 번</span> 주어집니다.
+	<div class="p12_1_start"><a href="07_2.html">시작하기</a></div>
+</div>
+<!-- 내용 end -->
+
+
+
+
+<!-- footer -->
+<div class="footer">
+	<!-- logo -->
+	<div class="f_logo"><img src="../img/logo.png" alt=""></div>
+
+	<!-- 검색-->
+	<div class="f_search"><input type="text" name="search" id="search" class="f_form" placeholder="검색"/><span class="f_s_btn"><a href="#"><img src="../img/search.gif"></a></span></div>
+
+<!-- 보조도구 아이콘 -->
+	<ul class="f_icon">
+		<li class="f_icon1"><a href="../inc/running.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>러닝맵</span></a></li>
+		<li class="f_icon2"><a href="#"><span>강의자료</span></a></li>
+		<li class="f_icon3"><a href="../inc/teacher.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>교수소개</span></a></li>
+		<li class="f_icon4"><a href="../inc/class.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>과목소개</span></a></li>
+	</ul>
+
+	<!-- 페이지 이동 -->
+	<ul class="f_btn">
+		<li><a onclick="goPrevPage(7,8);" style="cursor:pointer;"><img src="../img/arrow_left.png"></a></li>
+		<li><span>7</span> / 8</li>
+		<li><a onclick="goNextPage(7,8);" style="cursor:pointer;"><img src="../img/arrow_right.png"></a></li>
+	</ul>
+
+	<!-- 다음 페이지 이동 버튼 -->
+	<div class="f_next"><a href="#"><img src="../img/btn_next.png"></a></div>
+</div>
+
+
+</body>
+</html>

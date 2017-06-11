@@ -12,7 +12,7 @@ function changeReadyState()
 function goPrevPage(curr, max) {
     if ( curr == 1 )
         alert("첫 번째 페이지 입니다.");
-    else if ( readyToMove == true )
+    else
     {
         var to = curr - 1;
 
