@@ -1,0 +1,408 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>][instname][</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewpor​t" content="width-device-width,initial-scale=1, user-scalable=no" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<!-- 탭에 마우스 클릭시 이동 -->
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="../js/common.js"></script>
+       <script>
+        $(function() {
+            $('html').keydown(function(e) {
+                var key = e.which;
+                switch(key) {
+                    case 37:
+                        goPrevPage(][currpage][,][totalpage][);
+                        break;
+                    case 39:
+                        goNextPage(][currpage][,][totalpage][);
+                        break;
+                }
+            });
+
+            var t = "][time][";
+            t = t.split(':');
+
+            setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
+        });
+    </script>
+
+<script>
+  function menu_layer(menu){
+  if(menu=="tab01"){
+   document.getElementById("tab01").style.display="block";
+   document.getElementById("tab02").style.display="none";
+   document.getElementById("tab03").style.display="none";
+   document.getElementById("tab04").style.display="none";
+  }
+  if(menu=="tab02"){
+   document.getElementById("tab01").style.display="none";
+   document.getElementById("tab02").style.display="block";
+   document.getElementById("tab03").style.display="none";
+   document.getElementById("tab04").style.display="none";
+  }
+
+  if(menu=="tab03"){
+   document.getElementById("tab01").style.display="none";
+   document.getElementById("tab02").style.display="none";
+   document.getElementById("tab03").style.display="block";
+   document.getElementById("tab04").style.display="none";
+  }
+  if(menu=="tab04"){
+   document.getElementById("tab01").style.display="none";
+   document.getElementById("tab02").style.display="none";
+   document.getElementById("tab03").style.display="none";
+   document.getElementById("tab04").style.display="block";
+  }
+ }
+</script>
+</head>
+<body id="p4">
+<!-- gnb -->
+<div class="menu1">
+	<ul>
+		<li>
+			<a href="#" class="menu_btn">=== MENU ===</a>
+			<ul>
+				<li>
+					<dl>
+						<dt>오리엔테이션</dt>
+                        <dd><a href="01.html">- OT시작</a></dd>
+						<dd><a href="02.html">- 교수소개</a></dd>
+						<dd><a href="03.html">- 과목소개</a></dd>
+						<dd><a href="04.html">- 학습도우미</a></dd>
+						<dd><a href="05.html">- OT마무리</a></dd>
+					</dl>
+
+				</li>
+				<li>
+					<dl>
+						<dt>시작하기</dt>
+						<dd><a href="06.html">- 인트로</a></dd>
+						<dd><a href="07.html">- 학습목표&학습내용</a></dd>
+						<dd><a href="08.html">- 사전학습</a></dd>
+						<dd>&nbsp;</dd>
+                        <dd>&nbsp;</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><a href="09.html">학습하기</a></dt>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+						<dd>&nbsp;</dd>
+                        <dd>&nbsp;</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt>정리하기</dt>
+						<dd><a href="10.html">- 요약정리</a></dd>
+						<dd><a href="11.html">- 학습노트</a></dd>
+						<dd><a href="12.html">- 형성평가</a></dd>
+						<dd><a href="13.html">- 차시예고</a></dd>
+                        <dd>&nbsp;</dd>
+					</dl>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!-- gnb end -->
+
+
+<!-- top 차시명 & 강의명 -->
+<div class="t_class">
+	<div class="t_cass_t">◆ ][coursename][</div>
+
+	<div class="t_th">
+		<div class="th">OT</div>
+		<div class="name">오리엔테이션</div>
+	</div>
+	<div class="t_now"><span>오리엔테이션 | </span>학습도우미</div>
+</div>
+
+
+<!-- 내용 -->
+<!-- 전체 목차 -->
+<div style="display:block" id="tab01">
+	<ul class="p4_tap">
+		<li class="on" onClick="menu_layer('tab01')">전체목차</li>
+		<li onClick="menu_layer('tab02')">화면구성</li>
+		<li onClick="menu_layer('tab03')">학습자 편의성</li>
+		<li onClick="menu_layer('tab04')">환경설정</li>
+	</ul>
+	<div class="p4_tit">>> 본 과목은 총 ][weeks][주차로 구성되어 있습니다. 세부 목차를 자세히 살펴보시기 바랍니다.</div>
+	<div class="p4_tbl_l">
+		<ul class="p4_tbl_lay">
+			<li>
+				<table class="p4_tbl">
+					<colgroup>
+						<col width="25%" />
+						<col width="*" />
+					</colgroup>
+					<tr>
+						<th>주차</th>
+						<th>차시명</th>
+					</tr>
+					<!--<tr>
+						<td>1주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>1주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>2주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>2주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>3주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>3주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>4주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>4주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>5주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>5주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>6주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>6주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>7주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>7주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+                                        </tr>-->
+                                        ][lefttable][
+				</table>
+			</li>
+			<li>
+				<table class="p4_tbl">
+					<colgroup>
+						<col width="25%" />
+						<col width="*" />
+					</colgroup>
+					<tr>
+						<th>주차</th>
+						<th>차시명</th>
+					</tr>
+					<!--<tr>
+						<td class="bold">8주차</td>
+						<td class="bold">중간고사</td>
+					</tr>
+					<tr>
+						<td>9주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>9주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>10주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>10주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>11주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>11주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>12주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>12주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>13주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>13주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>14주차 1차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td>14주차 2차시</td>
+						<td>차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명 차시명</td>
+					</tr>
+					<tr>
+						<td class="bold">15주차</td>
+						<td class="bold">기말고사</td>
+                                        </tr>-->
+                                        ][righttable][
+				</table>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+
+<!-- 화면구성 -->
+<div style="display:none" id="tab02">
+	<ul class="p4_tap">
+		<li onClick="menu_layer('tab01')">전체목차</li>
+		<li class="on" onClick="menu_layer('tab02')">화면구성</li>
+		<li onClick="menu_layer('tab03')">학습자 편의성</li>
+		<li onClick="menu_layer('tab04')">환경설정</li>
+	</ul>
+	<div class="p4_tit">>> 학습화면은 다음과 같이 구성되어 있습니다.</div>
+	<div class="p4_map"><img src="../img/04_01.jpg"></div>
+</div>
+
+
+
+<!-- 학습자 편의성 -->
+<div style="display:none" id="tab03">
+	<ul class="p4_tap">
+		<li onClick="menu_layer('tab01')">전체목차</li>
+		<li onClick="menu_layer('tab02')">화면구성</li>
+		<li class="on" onClick="menu_layer('tab03')">학습자 편의성</li>
+		<li onClick="menu_layer('tab04')">환경설정</li>
+	</ul>
+	<div class="p4_tit">>> 본 콘텐츠는 웹 접근성을 고려하여 키보드로 페이지 이동이 가능하도록 구성되어 있습니다.</div>
+	<div class="p4_map"><img src="../img/04_02.jpg"></div>
+</div>
+
+
+
+<!-- 환경설정 -->
+<div style="display:none" id="tab04">
+	<ul class="p4_tap">
+		<li onClick="menu_layer('tab01')">전체목차</li>
+		<li onClick="menu_layer('tab02')">화면구성</li>
+		<li onClick="menu_layer('tab03')">학습자 편의성</li>
+		<li class="on" onClick="menu_layer('tab04')">환경설정</li>
+	</ul>
+	<div class="p4_tit">>> 여러분의 학습환경을 점검해 보세요. 원활한 학습을 위해서 다음의 권장사항이 필요합니다.</div>
+	<table class="p4_tb2">
+		<colgroup>
+			<col width="*" />
+			<col width="27%" />
+			<col width="27%" />
+			<col width="27%" />
+		</colgroup>
+		<tr>
+			<th>구분</th>
+			<th>항목</th>
+			<th>최소사양</th>
+			<th>권장사양</th>
+		</tr>
+		<tr>
+			<th rowspan="4">하드웨어 환경</th>
+			<td>CPU</td>
+			<td>펜티엄 42.6GHz 이상</td>
+			<td>듀얼 코어 이상</td>
+		</tr>
+		<tr>
+			<td>메모리</td>
+			<td>1GB 이상</td>
+			<td>2GB 이상</td>
+		</tr>
+		<tr>
+			<td>해상도</td>
+			<td>1024 * 768</td>
+			<td>1280 * 1024</td>
+		</tr>
+		<tr>
+			<td>기타</td>
+			<td colspan="2">스피커 또는 헤드셋</td>
+		</tr>
+		<tr>
+			<th rowspan="2">소프트웨어 환경</th>
+			<td>운영체제(OS)및 기본프로그램</td>
+			<td colspan="2">Windows 7이상
+			Internet Explorer 11 이상
+			Windows Media Player 9.0 이상</td>
+		</tr>
+		<tr>
+			<td>인터넷</td>
+			<td colspan="2">10Mbps 이상</td>
+		</tr>
+	</table>
+</div>
+
+
+
+
+<!-- 내용 end -->
+
+
+
+
+<!-- footer -->
+<div class="footer">
+	<!-- logo -->
+	<div class="f_logo"><img src="../img/logo.png" alt=""></div>
+
+	<!-- 검색-->
+	<div class="f_search"><input type="text" name="search" id="search" class="f_form" placeholder="검색"/><span class="f_s_btn"><a href="#"><img src="../img/search.gif"></a></span></div>
+
+	<!-- 보조도구 아이콘 -->
+	<ul class="f_icon">
+		<li class="f_icon1"><a href="../inc/running.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>러닝맵</span></a></li>
+		<li class="f_icon2"><a href="#"><span>강의자료</span></a></li>
+		<li class="f_icon3"><a href="../inc/teacher.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>교수소개</span></a></li>
+		<li class="f_icon4"><a href="../inc/class.html" target="_blank" onclick="MM_openBrWindow('','','scrollbars=no,width=1000,height=650,top=0,left=0')"><span>과목소개</span></a></li>
+	</ul>
+
+	<!-- 페이지 이동 -->
+	<ul class="f_btn">
+		<li><a onclick="goPrevPage(][currpage][,][totalpage][);" style="cursor:pointer;"><img src="../img/arrow_left.png"></a></li>
+		<li><span>][currpage][</span> / ][totalpage][</li>
+		<li><a onclick="goNextPage(][currpage][,][totalpage][);" style="cursor:pointer;"><img src="../img/arrow_right.png"></a></li>
+	</ul>
+
+	<!-- 다음 페이지 이동 버튼 -->
+	<div class="f_next"><a href="#"><img src="../img/btn_next.png"></a></div>
+</div>
+
+
+</body>
+</html>

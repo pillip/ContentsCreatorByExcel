@@ -141,18 +141,8 @@ def parsing2(worksheet, fn="02.html"):
 
     dict['profname'] = worksheet['B1'].value
 
-    #temp = str(worksheet['B2'].value).split('\n')
-    #for idx in range(len(temp)):
-    #    temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
-    #temp = ''.join(temp)
-    #dict['studyhistory'] = temp
     dict['studyhistory'] = str(worksheet['B2'].value)
 
-    #temp = str(worksheet['B3'].value).split('\n')
-    #for idx in range(len(temp)):
-    #    temp[idx] = '<dd>- ' + temp[idx] + '</dd>'
-    #temp = ''.join(temp)
-    #dict['history'] = temp
     dict['history'] = str(worksheet['B3'].value)
 
     writeFile(dict, fn)
@@ -283,9 +273,6 @@ def parsing9(worksheet, fn="09.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['9down1'] = worksheet['B1'].value
-    dict['9down2'] = worksheet['B2'].value
-    dict['9down3'] = worksheet['B3'].value
     dict['9video'] = worksheet['B4'].value
 
     temp = str(worksheet['B5'].value).split('\n')
