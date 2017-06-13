@@ -44,3 +44,18 @@ function goNextPage(curr, max) {
         alert("해당 페이지 학습을 완료해야 다음 페이지로 이동이 가능합니다.");
     }
 }
+
+$(document).ready(function() {
+    $('.menu_btn').mouseover(function () {
+        $('.menu1 ul li ul').css('display', 'block');
+        $('.menu2 ul li ul').css('display', 'block');
+    });
+
+    $('.menu1 ul li ul').mouseleave(function() {
+        $('.menu1 ul li ul').css('display', 'none');
+    });
+
+    $('.menu2 ul li ul').mouseleave(function() {
+        $('.menu2 ul li ul').css('display', 'none');
+    });
+});

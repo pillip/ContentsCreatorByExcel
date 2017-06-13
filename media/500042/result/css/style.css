@@ -26,7 +26,7 @@ select {margin:0}
 body,th,td,input,select,textarea,button {font-size:16px;line-height:1.3;font-family: '나눔고딕', 'Nanum Gothic', 'Dotum', sans-serif; color:#222222;border-radius:0}
 p {margin:0;padding:0;word-break:break-all}
 hr {display:none}
-pre {overflow-x:scroll;font-size:1.1em}
+pre {overflow-x:hidden;font-size:1.1em}
 a {color:inherit;text-decoration:none}
 address,caption,cite,code,dfn,em,var {color:inherit;font-style:normal;font-weight:normal}
 table {border-collapse:collapse; border-spacing:0;}
@@ -121,7 +121,7 @@ html,body {
 }
 
 .menu1 ul ul {	display: none;}
-.menu1 ul li:hover > ul {	display: block;}
+/*.menu1 ul li:hover > ul {	display: block;}*/
 .menu_btn {width:200px;height:25px;border-radius:0px 0px 5px 5px;background-color:#3c3c3c;color:#fff;font-weight:600;text-align:center;font-size:12px;padding-top:3px;}
 
 
@@ -195,7 +195,7 @@ html,body {
 }
 
 .menu2 ul ul {	display: none;}
-.menu2 ul li:hover > ul {	display: block;}
+/*.menu2 ul li:hover > ul {	display: block;}*/
 .menu_btn {width:200px;height:25px;border-radius:0px 0px 5px 5px;background-color:#3c3c3c;color:#fff;font-weight:600;text-align:center;font-size:12px;padding-top:3px;}
 
 
