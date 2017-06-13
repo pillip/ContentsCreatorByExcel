@@ -357,15 +357,19 @@ def parsing12_prob(workbook, fn="12_2.html"):
     else:
         dict['currpage'] = 7
 
-    for idx in range(1, 4):
-        if lecture == 1:
-            worksheet = workbook['12_' + str(idx + 1)]
-        else:
-            worksheet = workbook['7_' + str(idx + 1)]
+    if lecture == 1:
+        worksheet = workbook['12_2']
+    else:
+        worksheet = workbook['7_2']
 
-        flag = int(worksheet['B1'].value)
-        dict['12problem' + str(idx)] = str(worksheet['B2'].value)
-        dict['12example' + str(idx)] = str(worksheet['B3'].value)
+    for idx in range(1, 4):
+        cells = []
+        for i in range(1, 7):
+            cells.append('B'+ str((idx-1) * 6 + i))
+
+        flag = int(worksheet[cells[0]].value)
+        dict['12problem' + str(idx)] = str(worksheet[cells[1]].value)
+        dict['12example' + str(idx)] = str(worksheet[cells[2]].value)
 
         if flag == 1: # 단답형
             dict['12flag' + str(idx)] = '2'
@@ -373,14 +377,19 @@ def parsing12_prob(workbook, fn="12_2.html"):
             dict['12options' + str(idx)] = '<textarea id="answer' + str(idx) + '"' + onchangeFunc + ' class="p12_2_a3" placeholder="이곳에 정답을 입력하세요."></textarea>'
         else: # 객관식
             dict['12flag' + str(idx)] = '1'
-            temp = str(worksheet['B4'].value).split('\n')
+            t = (idx - 1) * 6 + 4
+            temp = []
+            temp.append(worksheet['B' + str(t)].value)
+            temp.append(worksheet['C' + str(t)].value)
+            temp.append(worksheet['D' + str(t)].value)
+            temp.append(worksheet['E' + str(t)].value)
             for i in range(len(temp)):
-                temp[i] = '<li><a onclick="changeNum(' + str(idx) + ',' + str(i+1) + ');"' + '>' + str(i + 1) + ". " + temp[i] + '</a></li>'
+                temp[i] = '<li><a style="cursor:pointer;" class="opt-' + str(i + 1) + '" onclick="changeNum(' + str(idx) + ',' + str(i+1) + ');"' + '>' + '<pre style="overflow-x:hidden;">' + str(i + 1) + ". " + temp[i] + "</pre>" + '</a></li>'
             temp = '<ul class="p12_2_v2">' + ''.join(temp) + '</ul>'
             dict['12options' + str(idx)] = temp
 
-        dict['12answernum' + str(idx)] = str(worksheet['B5'].value)
-        dict['12answer' + str(idx)] = str(worksheet['B6'].value)
+        dict['12answernum' + str(idx)] = str(worksheet[cells[4]].value)
+        dict['12answer' + str(idx)] = str(worksheet[cells[5]].value)
 
     writeFile(dict, fn)
 

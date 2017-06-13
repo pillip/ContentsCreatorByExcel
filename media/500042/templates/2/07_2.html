@@ -11,6 +11,8 @@
 <script src="../js/common.js"></script>
        <script>
         $(function() {
+             //changeReadyState();
+
             if ( '][12example1][' == 'None' )
                 $('#example1').css('display','none');
         });
@@ -20,9 +22,11 @@
         var src1 = '', src2 = '', src3 = '';
         var countCorrect = 0;
         var answer1 = '', answer2 = '', answer3 = '';
+        var count1 = 0, count2 = 0, count3 = 0;
 
         function nextBtn1() {
             var answers = '][12answernum1]['.split('/');
+            count1++;
 
             for ( var i in answers )
             {
@@ -30,23 +34,34 @@
                 {
                     countCorrect++;
                     src1 = '../img/o_o.png';
+                    $('#p12_prob_1 .p12_2_ok img').attr('src','../img/ok2.png');
                     break;
                 }
                 else
                 {
                     src1 = '../img/x_o.png';
+                    $('#p12_prob_1 .p12_2_ok img').attr('src','../img/no.png');
                 }
             }
 
-            $('#p12_prob_1').css('display','none');
-            $('#p12_prob_2').css('display','block');
+            if ( src1 == '../img/x_o.png' && count1 == 1 )
+            {
+			    wrapWindowByMask();
+                setTimeout("$('#mask').fadeOut(1000);", 1500);
+                return;
+            }
 
-            if ( '][12example2][' == 'None' )
-                $('#example2').css('display','none');
+            $('#p12_prob_1 .p12_2_ai').css('visibility','visible');
+            $('#p12_prob_1 .p12_2_a1').css('visibility','visible');
+            $('#p12_prob_1 .p12_2_a2').css('visibility','visible');
+
+            $('#p12_prob_1 .p12_2_next a').text("다음문제");
+            $('#p12_prob_1 .p12_2_next a').attr('onclick','nextProblem(1,2);');
         }
 
         function nextBtn2() {
             var answers = '][12answernum2]['.split('/');
+            count2++;
 
             for ( var i in answers )
             {
@@ -54,23 +69,34 @@
                 {
                     countCorrect++;
                     src2 = '../img/o_o.png';
+                    $('#p12_prob_2 .p12_2_ok img').attr('src','../img/ok2.png');
                     break;
                 }
                 else
                 {
                     src2 = '../img/x_o.png';
+                    $('#p12_prob_2 .p12_2_ok img').attr('src','../img/no.png');
                 }
             }
 
-            $('#p12_prob_2').css('display','none');
-            $('#p12_prob_3').css('display','block');
+            if ( src2 == '../img/x_o.png' && count2 == 1 )
+            {
+			    wrapWindowByMask();
+                setTimeout("$('#mask').fadeOut(1000);", 1500);
+                return;
+            }
 
-            if ( '][12example3][' == 'None' )
-                $('#example3').css('display','none');
+            $('#p12_prob_2 .p12_2_ai').css('visibility','visible');
+            $('#p12_prob_2 .p12_2_a1').css('visibility','visible');
+            $('#p12_prob_2 .p12_2_a2').css('visibility','visible');
+
+            $('#p12_prob_2 .p12_2_next a').text("다음문제");
+            $('#p12_prob_2 .p12_2_next a').attr('onclick','nextProblem(2,3);');
         }
 
         function nextBtn3() {
             var answers = '][12answernum3]['.split('/');
+            count3++;
 
             for ( var i in answers )
             {
@@ -78,29 +104,30 @@
                 {
                     countCorrect++;
                     src3 = '../img/o_o.png';
+                    $('#p12_prob_3 .p12_2_ok img').attr('src','../img/ok2.png');
                     break;
                 }
                 else
                 {
                     src3 = '../img/x_o.png';
+                    $('#p12_prob_3 .p12_2_ok img').attr('src','../img/no.png');
                 }
             }
 
-            $('#p12_prob_3').css('display','none');
-            $('.p12_2_t').css('display','none');
-            $('#p12_2').css('background','url("../img/1_bg12_4.jpg") no-repeat');
+            if ( src3 == '../img/x_o.png' && count3 == 1 )
+            {
+			    wrapWindowByMask();
+                setTimeout("$('#mask').fadeOut(1000);", 1500);
+                return;
+            }
 
-            $('#check1').attr('src', src1);
-            $('#check2').attr('src', src2);
-            $('#check3').attr('src', src3);
-            $('#ok-num').html(countCorrect.toString());
+            $('#p12_prob_3 .p12_2_ai').css('visibility','visible');
+            $('#p12_prob_3 .p12_2_a1').css('visibility','visible');
+            $('#p12_prob_3 .p12_2_a2').css('visibility','visible');
 
-            $('#p12_prob_4').css('display','block');
-
-            $('.f_next').css('display','block');
-            changeReadyState();
+            $('#p12_prob_3 .p12_2_next a').text("결과보기");
+            $('#p12_prob_3 .p12_2_next a').attr('onclick','nextProblem(3,4);');
         }
-
 
         function changeText(idx, val)
         {
@@ -122,18 +149,94 @@
         {
             if ( idx == 1 )
             {
+                $('#p12_prob_1 .opt-1').css('color',"");
+                $('#p12_prob_1 .opt-2').css('color',"");
+                $('#p12_prob_1 .opt-3').css('color',"");
+                $('#p12_prob_1 .opt-4').css('color',"");
+                $('#p12_prob_1 .opt-'+val.toString()).css('color',"#3c8be6");
+
                 answer1 = val.toString();
             }
             else if ( idx == 2 )
             {
+                $('#p12_prob_2 .opt-1').css('color',"");
+                $('#p12_prob_2 .opt-2').css('color',"");
+                $('#p12_prob_2 .opt-3').css('color',"");
+                $('#p12_prob_2 .opt-4').css('color',"");
+                $('#p12_prob_2 .opt-'+val.toString()).css('color',"#3c8be6");
                 answer2 = val.toString();
             }
             else
             {
+                $('#p12_prob_3 .opt-1').css('color',"");
+                $('#p12_prob_3 .opt-2').css('color',"");
+                $('#p12_prob_3 .opt-3').css('color',"");
+                $('#p12_prob_3 .opt-4').css('color',"");
+                $('#p12_prob_3 .opt-'+val.toString()).css('color',"#3c8be6");
+
                 answer3 = val.toString();
             }
         }
-    </script>
+
+        function nextProblem(curr, next)
+        {
+            if ( '][12example2][' == 'None' )
+                $('#example2').css('display','none');
+
+            if ( '][12example3][' == 'None' )
+                $('#example3').css('display','none');
+
+            if ( next == 4 )
+            {
+                $('#p12_prob_3').css('display','none');
+                $('.p12_2_t').css('display','none');
+                $('#p12_2').css('background','url("../img/1_bg12_4.jpg") no-repeat');
+
+                $('#check1').attr('src', src1);
+                $('#check2').attr('src', src2);
+                $('#check3').attr('src', src3);
+                $('#ok-num').html(countCorrect.toString());
+
+                $('#p12_prob_4').css('display','block');
+
+                $('.f_next').css('display','block');
+                changeReadyState();
+            }
+            else
+            {
+                $('#p12_prob_' + curr.toString()).css('display','none');
+                $('#p12_prob_' + next.toString()).css('display','block');
+            }
+        }
+
+        function wrapWindowByMask(){
+            //화면의 높이와 너비를 구한다.
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+            $('#mask').css({'width':maskWidth,'height':maskHeight});
+
+            //애니메이션 효과
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow",0.8);
+        }
+</script>
+    <style>
+        #mask {
+          position:absolute;
+          left:0;
+          top:0;
+          z-index:9000;
+          background-color:#000;
+          display:none;
+        }
+        #mask img {
+            position:absolute;
+            top:250px;
+            left:345px;
+        }
+    </style>
 </head>
 <body id="p12_2">
 <audio type="audio/mp3" src="../sound/quiz.mp3" autoplay preload="auto" loop></audio>
@@ -176,6 +279,8 @@
 </div>
 <!-- gnb end -->
 
+<!-- modal -->
+<div id="mask"><img src="../img/again.png"></div>
 
 <!-- top 차시명 & 강의명 -->
 <div class="t_class">
@@ -192,6 +297,13 @@
 <!-- 내용 -->
 <div class="p12_2_t">오늘 학습한 내용을 잘 이해하였는지 문제를 풀어 확인해보세요.</div>
 <div id="p12_prob_1" class="p12_2_lay" style="display:block;">
+    <div class="p12_2_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답">-->
+		<!-- 오답 <img src="../img/no.png" alt="오답"> -->
+        <img/>
+	</div>
+
+    <div class="p12_2_lay2">
 	<div class="p12_2_qi">Q1</div>
 	<!-- 문제 -->
         <div class="p12_2_q"><pre>][12problem1][</pre></div>
@@ -201,26 +313,32 @@
             <pre>][12example1][</pre>
 	</div>
 
-
     ][12options1][
 
-	<div class="p12_2_next"><a onclick="nextBtn1();" style="cursor:pointer;">다음문제</a></div>
+	<div class="p12_2_next"><a onclick="nextBtn1();" style="cursor:pointer;">정답확인</a></div>
 
 
 
 
 	<!-- 정답 해설 -->
-	<div class="p12_2_ai">정답&해설</div>
-	<div class="p12_2_a][12flag1][">
+	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
+	<div class="p12_2_a][12flag1][" style="visibility:hidden;">
 		<ul>
                         <li>][12answernum1][</li>
-                        <li><pre>][12answer1][</pre></li>
+                        <li>][12answer1][</li>
 		</ul>
 	</div>
+        </div>
 
 </div>
 
 <div id="p12_prob_2" style="display:none;" class="p12_2_lay">
+    <div class="p12_2_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답">-->
+		<!-- 오답 <img src="../img/no.png" alt="오답"> -->
+        <img/>
+	</div>
+    <div class="p12_2_lay2">
 	<div class="p12_2_qi">Q2</div>
 	<!-- 문제 -->
         <div class="p12_2_q"><pre>][12problem2][</pre></div>
@@ -232,21 +350,29 @@
 
     ][12options2][
 
-	<div class="p12_2_next"><a onclick="nextBtn2();" style="cursor:pointer;">다음문제</a></div>
+	<div class="p12_2_next"><a onclick="nextBtn2();" style="cursor:pointer;">정답확인</a></div>
+
+
 
 
 	<!-- 정답 해설 -->
-	<div class="p12_2_ai">정답&해설</div>
-	<div class="p12_2_a][12flag2][">
+	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
+	<div class="p12_2_a][12flag2][" style="visibility:hidden;">
 		<ul>
                         <li>][12answernum2][</li>
                         <li><pre>][12answer2][</pre></li>
 		</ul>
 	</div>
-
+    </div>
 </div>
 
 <div id="p12_prob_3" style="display:none;" class="p12_2_lay">
+    <div class="p12_2_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답">-->
+		<!-- 오답 <img src="../img/no.png" alt="오답"> -->
+        <img/>
+	</div>
+    <div class="p12_2_lay2">
 	<div class="p12_2_qi">Q3</div>
 	<!-- 문제 -->
         <div class="p12_2_q"><pre>][12problem3][</pre></div>
@@ -256,19 +382,20 @@
             <pre>][12example3][</pre>
 	</div>
 
+	<!-- 보기 2 -->
     ][12options3][
 
-	<div class="p12_2_next"><a onclick="nextBtn3();" style="cursor:pointer;">다음문제</a></div>
+	<div class="p12_2_next"><a onclick="nextBtn3();" style="cursor:pointer;">정답확인</a></div>
 
 	<!-- 정답 해설 -->
-	<div class="p12_2_ai">정답&해설</div>
-	<div class="p12_2_a][12flag3][">
+	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
+	<div class="p12_2_a][12flag3][" style="visibility:hidden;">
 		<ul>
                         <li>][12answernum3][</li>
                         <li><pre>][12answer3][</pre></li>
 		</ul>
 	</div>
-
+    </div>
 </div>
 
     <div id="p12_prob_4" style="display:none;">

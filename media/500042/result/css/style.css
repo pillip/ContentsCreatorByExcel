@@ -442,7 +442,7 @@ html,body {
 .p12_4_a {background:url('../img/12_4_abg.png') no-repeat;width:165px;height:212px;display:block;margin-left:50px;margin-bottom:30px;float:left;text-align:center;}
 .p12_4_a img {width:50px;margin-top:70px;}
 .p12_4_a span {display:block;font-size:24px;font-weight:600;text-align:center;margin-top:30px;}
-.p12_4_btn {clear:both;margin:0px auto;width:140px;height:35px;text-align:center;color:#fff;font-weight:600;background-color:#549a4b;border-radius:7px;padding-top:7px}
+.p12_4_btn {clear:both;margin:0px auto;width:140px;height:35px;text-align:center;color:#fff;font-weight:600;border-radius:7px;padding-top:7px}
 .p12_4_btn a:hover {color:#fcff00;}
 
 
