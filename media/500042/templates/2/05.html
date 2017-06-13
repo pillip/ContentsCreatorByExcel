@@ -32,12 +32,14 @@
 
         function printDocument()
         {
+            var title = "][coursename][ - ][weeknum][주차 ";
+            title = title + "][lecnum][차시";
             $('.p10_text').printThis({
                 debug: false,
                 importCSS: true,
                 printContainer: true,
                 loadCSS: "../css/style.css",
-                pageTitle: "][coursename][ - ][lecturename][",
+                pageTitle: title,
                 removeinline: false
             });
         }
@@ -100,7 +102,7 @@
 
 <!-- 내용 -->
 <div class="p10_t">* 이번 시간에 학습한 내용을 다시 한번 정리해 보세요.</div>
-<div class="p10_print"><a onclick="printDocument();" style="cursor:pointer;">인쇄하기 ▶</a></div>
+<div class="p10_print" onclick="printDocument();" style="cursor:pointer;"><a>인쇄하기 ▶</a></div>
 <div class="p10_text">
 	][10content][
 </div>
