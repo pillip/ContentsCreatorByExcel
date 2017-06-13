@@ -19,7 +19,7 @@ def parse(filename, instNum, courseNum, lectureNum):
 
     if lecture == 1:
         totalPage = course.pageNumDefault + course.pageNumOT
-        lectureName = workbook[u'6']['B1'].value
+        lectureName = str(workbook[u'6']['B1'].value)
 
         parsing1(workbook[u'1'])
         parsing2(workbook[u'2'])
