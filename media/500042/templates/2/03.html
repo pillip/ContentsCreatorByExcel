@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
-       <script>
+      <script>
         $(function() {
             $('html').keydown(function(e) {
                 var key = e.which;
@@ -27,11 +27,18 @@
         var src1 = '', src2 = '', src3 = '';
         var countCorrect = 0;
         var answer1 = '', answer2 = '', answer3 = '';
+        var flag1 = true, flag2 = true, flag3 = true;
 
         function checkAnswer1()
         {
-            if ( src1 != '' )
+            if ( src1 != '' || flag1 == false )
                 return;
+
+            if ( answer1 == '' )
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
 
             if ( '][8answer1][' == answer1 )
             {
@@ -47,16 +54,23 @@
                 $('#ox1 .p8_ok img').attr('src','../img/no.png');
             }
 
+            flag1 = false;
             $('#ox1 .p8_ans').css('display','block');
             $('#ox1 .p8_a_t').css('display','inline-block');
         }
 
         function checkAnswer2()
         {
-            if ( src2 != '' )
+            if ( src2 != '' || flag2 == false)
                 return;
 
-            if ( '][8answer2][' == answer1 )
+            if ( answer2 == '' )
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
+
+            if ( '][8answer2][' == answer2 )
             {
                 countCorrect++;
                 src2 = '../img/o_o.png';
@@ -70,6 +84,7 @@
                 $('#ox2 .p8_ok img').attr('src','../img/no.png');
             }
 
+            flag2 = false;
             $('#ox2 .p8_ans').css('display','block');
             $('#ox2 .p8_a_t').css('display','inline-block');
         }
@@ -77,10 +92,16 @@
 
         function checkAnswer3()
         {
-            if ( src3 != '' )
+            if ( src3 != '' || flag3 == false)
                 return;
 
-            if ( '][8answer3][' == answer1 )
+            if ( answer3 == '' )
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
+
+            if ( '][8answer3][' == answer3 )
             {
                 countCorrect++;
                 src3 = '../img/o_o.png';
@@ -94,6 +115,7 @@
                 $('#ox3 .p8_ok img').attr('src','../img/no.png');
             }
 
+            flag3 = false;
             $('#ox3 .p8_ans').css('display','block');
             $('#ox3 .p8_a_t').css('display','inline-block');
         }
@@ -192,7 +214,7 @@
         <div class="p8_q_num"><img src="../img/q_01.png"></div>
         <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
             <div class="p8_q"><pre>][8problem1][</pre></div>
-        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox1 .o_img').attr('src','../img/o_o.png');$('#ox1 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox1 .o_img').attr('src','../img/o.png');$('#ox1 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="if(flag1){$('#ox1 .o_img').attr('src','../img/o_o.png');$('#ox1 .x_img').attr('src','../img/x.png');answer1='o';}" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="if(flag1){$('#ox1 .o_img').attr('src','../img/o.png');$('#ox1 .x_img').attr('src','../img/x_o.png');answer1='x';}" src="../img/x.png"></div>
         <div class="p8_re01" style="cursor:pointer;" onclick="checkAnswer1();"><a id="show-btn">정답확인</a></div>
 
 
@@ -221,7 +243,7 @@
         <div class="p8_q_num"><img src="../img/q_02.png"></div>
         <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
             <div class="p8_q"><pre>][8problem2][</pre></div>
-        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox2 .o_img').attr('src','../img/o_o.png');$('#ox2 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox2 .o_img').attr('src','../img/o.png');$('#ox2 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="if(flag2){$('#ox2 .o_img').attr('src','../img/o_o.png');$('#ox2 .x_img').attr('src','../img/x.png');answer2='o';}" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="if(flag2){$('#ox2 .o_img').attr('src','../img/o.png');$('#ox2 .x_img').attr('src','../img/x_o.png');answer2='x';}" src="../img/x.png"></div>
         <div class="p8_re01" style="cursor:pointer;" onclick="checkAnswer2();"><a id="show-btn">정답확인</a></div>
 
 
@@ -250,7 +272,7 @@
         <div class="p8_q_num"><img src="../img/q_03.png"></div>
         <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
             <div class="p8_q"><pre>][8problem3][</pre></div>
-        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox3 .o_img').attr('src','../img/o_o.png');$('#ox3 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox3 .o_img').attr('src','../img/o.png');$('#ox3 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="if(flag3) {$('#ox3 .o_img').attr('src','../img/o_o.png');$('#ox3 .x_img').attr('src','../img/x.png');answer3='o';}" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="if(flag3) {$('#ox3 .o_img').attr('src','../img/o.png');$('#ox3 .x_img').attr('src','../img/x_o.png');answer3='x';}" src="../img/x.png"></div>
         <div class="p8_re01" style="cursor:pointer;" onclick="checkAnswer3();"><a id="show-btn">정답확인</a></div>
 
 
@@ -284,9 +306,9 @@
                 <span>Q3</span>
             </div>
         </div>
+        <div class="p12_4_btn"><a href="03.html"><img src="../img/btn_replay.png"></a></div>
     </div>
 <!-- 내용 end -->
-
 
 
 <!-- footer -->
