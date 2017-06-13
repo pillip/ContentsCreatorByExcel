@@ -22,12 +22,106 @@
                         break;
                 }
             });
-
-            var t = "][time][";
-            t = t.split(':');
-
-            setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
         });
+
+        var src1 = '', src2 = '', src3 = '';
+        var countCorrect = 0;
+        var answer1 = '', answer2 = '', answer3 = '';
+
+        function checkAnswer1()
+        {
+            if ( src1 != '' )
+                return;
+
+            if ( '][8answer1][' == answer1 )
+            {
+                countCorrect++;
+                src1 = '../img/o_o.png';
+
+                $('#ox1 .p8_ok img').attr('src','../img/ok2.png');
+            }
+            else
+            {
+                src1 = '../img/x_o.png';
+
+                $('#ox1 .p8_ok img').attr('src','../img/no.png');
+            }
+
+            $('#ox1 .p8_ans').css('visibility','visible');
+            $('#ox1 .p8_a_t').css('visibility','visible');
+        }
+
+        function checkAnswer2()
+        {
+            if ( src2 != '' )
+                return;
+
+            if ( '][8answer2][' == answer1 )
+            {
+                countCorrect++;
+                src2 = '../img/o_o.png';
+
+                $('#ox2 .p8_ok img').attr('src','../img/ok2.png');
+            }
+            else
+            {
+                src2 = '../img/x_o.png';
+
+                $('#ox2 .p8_ok img').attr('src','../img/no.png');
+            }
+
+            $('#ox2 .p8_ans').css('visibility','visible');
+            $('#ox2 .p8_a_t').css('visibility','visible');
+        }
+
+
+        function checkAnswer3()
+        {
+            if ( src3 != '' )
+                return;
+
+            if ( '][8answer3][' == answer1 )
+            {
+                countCorrect++;
+                src3 = '../img/o_o.png';
+
+                $('#ox3 .p8_ok img').attr('src','../img/ok2.png');
+            }
+            else
+            {
+                src3 = '../img/x_o.png';
+
+                $('#ox3 .p8_ok img').attr('src','../img/no.png');
+            }
+
+            $('#ox3 .p8_ans').css('visibility','visible');
+            $('#ox3 .p8_a_t').css('visibility','visible');
+        }
+
+        function nextProblem(curr, next)
+        {
+            if ( next == 4 )
+            {
+                $('#p8').css('background','url("../img/1_bg12_4.jpg") no-repeat');
+                $('#p8').css('width','1000px');
+
+                $('#check1').attr('src', src1);
+                $('#check2').attr('src', src2);
+                $('#check3').attr('src', src3);
+                $('#ok-num').html(countCorrect.toString());
+
+                $('#ox' + curr.toString()).css('display','none');
+                $('#p12_prob_4').css('display','block');
+
+                $('.f_next').css('display','block');
+                changeReadyState();
+            }
+            else
+            {
+                $('#ox' + curr.toString()).css('display','none');
+                $('#ox' + next.toString()).css('display','block');
+            }
+        }
     </script>
 
 </head>
@@ -100,26 +194,111 @@
 
 
 <!-- 내용 -->
-<div class="p8_lay">
-	<!-- 문제 -->
-	<div class="p8_q_num"><img src="../img/q_01.png"></div>
-	<div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
-        <div class="p8_q"><pre>][8problem][</pre></div>
-	<div class="p8_ox"><img src="../img/o.png"><img src="../img/x.png" class="left"></div>
-	<div class="p8_re01"><a id="show-btn" onclick="$('.p8_ans').css('visibility','visible');$('.p8_a_t').css('visibility','visible');">정답확인</a></div>
-
-
-	<!-- 정답 -->
-	<div class="p8_ans" style="visibility:hidden;"><img src="../img/ok.png"></div>
-	<div class="p8_a_t" style="visibility:hidden;">
-		<ul>
-			<li><img src="../img/][8answer][_o.png"></li>
-                        <li><pre>][8explanation][</pre>
-				<div class="p8_green01"><a>다음문제 ▶</a></div>
-			</li>
-		</ul>	
+<div id="ox1" class="p8_lay" style="display:block">
+    <div class="p8_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답"> -->
+		<!-- 오답<img src="../img/no.png" alt="오답">-->
+        <img/>
 	</div>
+
+    <div class="p8_lay2">
+        <!-- 문제 -->
+        <div class="p8_q_num"><img src="../img/q_01.png"></div>
+        <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
+            <div class="p8_q"><pre>][8problem1][</pre></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox1 .o_img').attr('src','../img/o_o.png');$('#ox1 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox1 .o_img').attr('src','../img/o.png');$('#ox1 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_re01"><a id="show-btn" style="cursor:pointer;" onclick="checkAnswer1();">정답확인</a></div>
+
+
+        <!-- 정답 -->
+        <div class="p8_ans" style="visibility:hidden;"><img src="../img/ok.png"></div>
+        <div class="p8_a_t" style="visibility:hidden;">
+            <ul>
+                <li><img src="../img/][8answer1][_o.png"></li>
+                            <li><pre>][8explanation1][</pre>
+                    <div class="p8_green01"><a style="cursor:pointer;" onclick="nextProblem(1,2);">다음문제 ▶</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+<div id="ox2" class="p8_lay" style="display:none">
+    <div class="p8_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답"> -->
+		<!-- 오답<img src="../img/no.png" alt="오답">-->
+        <img/>
+	</div>
+
+    <div class="p8_lay2">
+        <!-- 문제 -->
+        <div class="p8_q_num"><img src="../img/q_02.png"></div>
+        <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
+            <div class="p8_q"><pre>][8problem2][</pre></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox2 .o_img').attr('src','../img/o_o.png');$('#ox2 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox2 .o_img').attr('src','../img/o.png');$('#ox2 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_re01"><a id="show-btn" style="cursor:pointer;" onclick="checkAnswer2();">정답확인</a></div>
+
+
+        <!-- 정답 -->
+        <div class="p8_ans" style="visibility:hidden;"><img src="../img/ok.png"></div>
+        <div class="p8_a_t" style="visibility:hidden;">
+            <ul>
+                <li><img src="../img/][8answer2][_o.png"></li>
+                            <li><pre>][8explanation2][</pre>
+                    <div class="p8_green01"><a style="cursor:pointer;" onclick="nextProblem(2,3);">다음문제 ▶</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="ox3" class="p8_lay" style="display:none">
+    <div class="p8_ok">
+		<!-- 정답<img src="../img/ok2.png" alt="정답"> -->
+		<!-- 오답<img src="../img/no.png" alt="오답">-->
+        <img/>
+	</div>
+
+    <div class="p8_lay2">
+        <!-- 문제 -->
+        <div class="p8_q_num"><img src="../img/q_03.png"></div>
+        <div class="p8_q_t">* 다음 문제를 읽고 정답을 선택해보세요.</div>
+            <div class="p8_q"><pre>][8problem3][</pre></div>
+        <div class="p8_ox"><img class="o_img" style="cursor:pointer;" onclick="$('#ox3 .o_img').attr('src','../img/o_o.png');$('#ox3 .x_img').attr('src','../img/x.png');answer1='o';" src="../img/o.png"><img class="x_img left" style="cursor:pointer;" onclick="$('#ox3 .o_img').attr('src','../img/o.png');$('#ox3 .x_img').attr('src','../img/x_o.png');answer1='x';" src="../img/x.png"></div>
+        <div class="p8_re01"><a id="show-btn" style="cursor:pointer;" onclick="checkAnswer3();">정답확인</a></div>
+
+
+        <!-- 정답 -->
+        <div class="p8_ans" style="visibility:hidden;"><img src="../img/ok.png"></div>
+        <div class="p8_a_t" style="visibility:hidden;">
+            <ul>
+                <li><img src="../img/][8answer3][_o.png"></li>
+                            <li><pre>][8explanation3][</pre>
+                    <div class="p8_green01"><a style="cursor:pointer;" onclick="nextProblem(3,4);">결과보기 ▶</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div id="p12_prob_4" style="display:none;">
+        <div class="p12_4_t">총 <span>3</span>문제 중 <span id="ok-num"></span>문제 맞히셨습니다.</div>
+        <div class="p12_4_alay">
+            <div class="p12_4_a">
+                <img id="check1" src="../img/o_o.png">
+                <span>Q1</span>
+            </div>
+
+            <div class="p12_4_a">
+                <img id="check2" src="../img/x_o.png">
+                <span>Q2</span>
+            </div>
+
+            <div class="p12_4_a">
+                <img id="check3" src="../img/o_o.png">
+                <span>Q3</span>
+            </div>
+        </div>
+    </div>
 <!-- 내용 end -->
 
 

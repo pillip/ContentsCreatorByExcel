@@ -257,9 +257,17 @@ def parsing8(worksheet, fn="08.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['8problem'] = worksheet['B1'].value
-    dict['8answer'] = worksheet['B2'].value
-    dict['8explanation'] = worksheet['B3'].value
+    dict['8problem1'] = worksheet['B1'].value
+    dict['8answer1'] = worksheet['B2'].value
+    dict['8explanation1'] = worksheet['B3'].value
+
+    dict['8problem2'] = worksheet['B4'].value
+    dict['8answer2'] = worksheet['B5'].value
+    dict['8explanation2'] = worksheet['B6'].value
+
+    dict['8problem3'] = worksheet['B7'].value
+    dict['8answer3'] = worksheet['B8'].value
+    dict['8explanation3'] = worksheet['B9'].value
 
     writeFile(dict, fn)
 
