@@ -23,8 +23,18 @@
         var countCorrect = 0;
         var answer1 = '', answer2 = '', answer3 = '';
         var count1 = 0, count2 = 0, count3 = 0;
+        var flag1 = true, flag2 = true, flag3 = true;
 
         function nextBtn1() {
+            if ( flag1 == false )
+                return;
+
+            if (answer1 == '')
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
+
             var answers = '][12answernum1]['.split('/');
             count1++;
 
@@ -51,15 +61,26 @@
                 return;
             }
 
+            flag1 = false;
+
             $('#p12_prob_1 .p12_2_ai').css('visibility','visible');
             $('#p12_prob_1 .p12_2_a1').css('visibility','visible');
             $('#p12_prob_1 .p12_2_a2').css('visibility','visible');
 
             $('#p12_prob_1 .p12_2_next a').text("다음문제");
-            $('#p12_prob_1 .p12_2_next a').attr('onclick','nextProblem(1,2);');
+            $('#p12_prob_1 .p12_2_next').attr('onclick','nextProblem(1,2);');
         }
 
         function nextBtn2() {
+            if ( flag2 == false )
+                return;
+
+            if (answer2 == '')
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
+
             var answers = '][12answernum2]['.split('/');
             count2++;
 
@@ -86,15 +107,26 @@
                 return;
             }
 
+            flag2 = false;
+
             $('#p12_prob_2 .p12_2_ai').css('visibility','visible');
             $('#p12_prob_2 .p12_2_a1').css('visibility','visible');
             $('#p12_prob_2 .p12_2_a2').css('visibility','visible');
 
             $('#p12_prob_2 .p12_2_next a').text("다음문제");
-            $('#p12_prob_2 .p12_2_next a').attr('onclick','nextProblem(2,3);');
+            $('#p12_prob_2 .p12_2_next').attr('onclick','nextProblem(2,3);');
         }
 
         function nextBtn3() {
+            if ( flag3 == false )
+                return;
+
+            if (answer3 == '')
+            {
+                alert("답을 선택하세요.");
+                return;
+            }
+
             var answers = '][12answernum3]['.split('/');
             count3++;
 
@@ -121,12 +153,14 @@
                 return;
             }
 
+            flag3 = false;
+
             $('#p12_prob_3 .p12_2_ai').css('visibility','visible');
             $('#p12_prob_3 .p12_2_a1').css('visibility','visible');
             $('#p12_prob_3 .p12_2_a2').css('visibility','visible');
 
             $('#p12_prob_3 .p12_2_next a').text("결과보기");
-            $('#p12_prob_3 .p12_2_next a').attr('onclick','nextProblem(3,4);');
+            $('#p12_prob_3 .p12_2_next').attr('onclick','nextProblem(3,4);');
         }
 
         function changeText(idx, val)
@@ -315,7 +349,7 @@
 
     ][12options1][
 
-	<div class="p12_2_next"><a onclick="nextBtn1();" style="cursor:pointer;">정답확인</a></div>
+	<div class="p12_2_next" onclick="nextBtn1();" style="cursor:pointer;"><a>정답확인</a></div>
 
 
 
@@ -324,7 +358,7 @@
 	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
 	<div class="p12_2_a][12flag1][" style="visibility:hidden;">
 		<ul>
-                        <li>][12answernum1][</li>
+                        <li>][12answernum1_1][</li>
                         <li>][12answer1][</li>
 		</ul>
 	</div>
@@ -350,7 +384,7 @@
 
     ][12options2][
 
-	<div class="p12_2_next"><a onclick="nextBtn2();" style="cursor:pointer;">정답확인</a></div>
+	<div class="p12_2_next"  onclick="nextBtn2();" style="cursor:pointer;"><a>정답확인</a></div>
 
 
 
@@ -359,7 +393,7 @@
 	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
 	<div class="p12_2_a][12flag2][" style="visibility:hidden;">
 		<ul>
-                        <li>][12answernum2][</li>
+                        <li>][12answernum2_1][</li>
                         <li><pre>][12answer2][</pre></li>
 		</ul>
 	</div>
@@ -385,13 +419,13 @@
 	<!-- 보기 2 -->
     ][12options3][
 
-	<div class="p12_2_next"><a onclick="nextBtn3();" style="cursor:pointer;">정답확인</a></div>
+	<div class="p12_2_next" onclick="nextBtn3();" style="cursor:pointer;"><a>정답확인</a></div>
 
 	<!-- 정답 해설 -->
 	<div class="p12_2_ai" style="visibility:hidden;">정답&해설</div>
 	<div class="p12_2_a][12flag3][" style="visibility:hidden;">
 		<ul>
-                        <li>][12answernum3][</li>
+                        <li>][12answernum3_1][</li>
                         <li><pre>][12answer3][</pre></li>
 		</ul>
 	</div>
@@ -416,7 +450,7 @@
                 <span>Q3</span>
             </div>
         </div>
-        <div class="p12_4_btn"><a href="12.html"><img src="../img/btn_replay.png"></a></div>
+        <div class="p12_4_btn" onclick="location.href='12.html';"><a><img src="../img/btn_replay.png"></a></div>
     </div>
 
 <!-- 내용 end -->
