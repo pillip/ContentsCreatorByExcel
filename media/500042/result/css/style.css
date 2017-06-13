@@ -31,6 +31,7 @@ a {color:inherit;text-decoration:none}
 address,caption,cite,code,dfn,em,var {color:inherit;font-style:normal;font-weight:normal}
 table {border-collapse:collapse; border-spacing:0;}
 th {font-weight:normal}
+pre {font-family:'NanumSquare'}
 
 * {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
  /* * {-webkit-text-size-adjust:none;}뷰표트 변환시 폰트크기 자동확대 방지 */

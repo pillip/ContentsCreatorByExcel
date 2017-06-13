@@ -171,9 +171,10 @@ def parsing4(worksheet, fn="04.html"):
 
     week = 1
     lec = 1
-    temp = str(worksheet['B1'].value).split('\n')
-    for idx in range(len(temp)):
-        temp[idx] = '<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td>' + temp[idx] + '</td></tr>'
+    num = int(worksheet['B2'].value)
+    temp = []
+    for idx in range(3, num + 3):
+        temp.append('<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td><pre>' + str(worksheet['B'+str(idx)].value) + '</pre></td></tr>')
 
         lec += 1
         if lec > course.lectureNumbersPerWeek:
@@ -184,12 +185,13 @@ def parsing4(worksheet, fn="04.html"):
 
     week = 8
     lec = 1
-    temp = str(worksheet['B2'].value).split('\n')
-    for idx in range(len(temp)):
+    num = int(worksheet['D2'].value)
+    temp = []
+    for idx in range(3, num + 3):
         if week == 8 or week == 15:
-            temp[idx] = '<tr><td>' + str(week) + '주차</td>' + '<td>' + temp[idx] + '</td></tr>'
+            temp.append('<tr><td>' + str(week) + '주차</td>' + '<td><pre>' + str(worksheet['D' + str(idx)].value) + '</pre></td></tr>')
         else:
-            temp[idx] = '<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td>' + temp[idx] + '</td></tr>'
+            temp.append('<tr><td>' + str(week) + '주차 ' + str(lec) + '차시</td>' + '<td><pre>' + str(worksheet['D' + str(idx)].value) + '</pre></td></tr>')
 
         if week == 8 or week == 15:
             lec = course.lectureNumbersPerWeek
