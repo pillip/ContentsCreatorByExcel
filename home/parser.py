@@ -392,6 +392,7 @@ def parsing12_prob(workbook, fn="12_2.html"):
             dict['12options' + str(idx)] = temp
 
         dict['12answernum' + str(idx)] = str(worksheet[cells[4]].value)
+        dict['12answernum' + str(idx) + '_1'] = str(worksheet[cells[4]].value).split('/')[0]
         dict['12answer' + str(idx)] = str(worksheet[cells[5]].value)
 
     writeFile(dict, fn)
