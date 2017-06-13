@@ -37,6 +37,8 @@
             if ( typeof day != 'undefined' )
                 cookies += ';expires=' + expire.toGMTString() + ';';
             document.cookie = cookies;
+
+            alert("본 내용은 학습자의 PC에 저장되어있습니다. PC를 변경하거나 인터넷 옵션에서 쿠키를 삭제한 경우에는 저장한 내용을 불러올 수 없으니 학습에 참고하세요!!!");
         }
 
         function getCookie(name)
@@ -58,7 +60,7 @@
         }
 
         $(document).ready(function () {
-            var str = getCookie('][lecturename][');
+            var str = getCookie('][coursename][-][weeknum][-][lecnum][');
             $('#p11_t').val(str.replace('<br>','\r\n'));
         });
     </script>
@@ -121,7 +123,7 @@
 <!-- 내용 -->
 <div class="p11_t">* 이번 시간에 학습한 내용에 대해 스스로 정리해 보세요.</div>
 <textarea name="p11_t" id="p11_t" class="p11_text" placeholder="이곳에 의견을 입력하세요."></textarea>
-<div class="p11_write"><a onclick="setCookie('][lecturename][', 30);" style="cursor:pointer;">저장하기</a></div>
+<div class="p11_write" onclick="setCookie('][coursename][-][weeknum][-][lecnum][', 987654321);" style="cursor:pointer;"><a>저장하기</a></div>
 <!-- 내용 end -->
 
 

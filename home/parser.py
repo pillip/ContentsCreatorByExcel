@@ -88,6 +88,9 @@ def writeFile(dict, fn):
             if len(newLine) >= 5:
                 newLine[3] = str(dict[newLine[3]])
 
+            if len(newLine) >= 7:
+                newLine[5] = str(dict[newLine[5]])
+
             newLine = ''.join(newLine)
 
             resultFile.write(newLine)
