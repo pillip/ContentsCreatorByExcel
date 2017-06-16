@@ -58,4 +58,10 @@ $(document).ready(function() {
     $('.menu2 ul li ul').mouseleave(function() {
         $('.menu2 ul li ul').css('display', 'none');
     });
+
+    $('.f_s_btn a img').click(function () {
+        var searchText = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&ie=utf8&query=' + escape($('#search').val());
+
+        window.open(searchText);
+    });
 });
