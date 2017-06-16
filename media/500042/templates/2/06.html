@@ -31,9 +31,15 @@
 
         function setCookie(name, day)
         {
+            if ( $('#p11_t').val() == '' )
+            {
+                alert("내용을 입력하세요.");
+                return;
+            }
+
             var expire = new Date();
             expire.setDate(expire.getDate() + day);
-            cookies = name + '=' + escape($('#p11_t').val().replace(/\n/g,"<br>")) + '; path=/';
+            cookies = name + '=' + escape($('#p11_t').val()) + '; path=/';
             if ( typeof day != 'undefined' )
                 cookies += ';expires=' + expire.toGMTString() + ';';
             document.cookie = cookies;
