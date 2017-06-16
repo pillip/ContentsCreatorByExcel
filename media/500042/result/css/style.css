@@ -26,12 +26,11 @@ select {margin:0}
 body,th,td,input,select,textarea,button {font-size:16px;line-height:1.3;font-family: '나눔고딕', 'Nanum Gothic', 'Dotum', sans-serif; color:#222222;border-radius:0}
 p {margin:0;padding:0;word-break:break-all}
 hr {display:none}
-pre {overflow-x:hidden;}
 a {color:inherit;text-decoration:none}
 address,caption,cite,code,dfn,em,var {color:inherit;font-style:normal;font-weight:normal}
 table {border-collapse:collapse; border-spacing:0;}
 th {font-weight:normal}
-pre {font-family: NanumSquare}
+pre {font-family: '나눔고딕', 'Nanum Gothic', 'Dotum'; overflow-x:hidden; overflow-y:hidden;}
 
 * {-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
  /* * {-webkit-text-size-adjust:none;}뷰표트 변환시 폰트크기 자동확대 방지 */
