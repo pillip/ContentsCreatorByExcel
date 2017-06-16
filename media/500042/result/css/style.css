@@ -285,7 +285,7 @@ pre {
 /* 3 page */
 #p3 {background:url('../img/1_bg03.jpg') no-repeat;}
 .p3_t {clear:both;font-size:12px;text-align:center;width:1000px;display:block;margin-top:1px;height:18px;}
-.p3_avi {margin-left:101px;} /* 과목소개 영상 위치 이동시 조절 */
+.p3_avi {margin-left:100px;} /* 과목소개 영상 위치 이동시 조절 */
 
 
 
