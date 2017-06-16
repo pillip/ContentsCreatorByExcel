@@ -144,6 +144,79 @@
                 $('#ox' + next.toString()).css('display','block');
             }
         }
+
+        $(document).ready(function() {
+            var imgSrc = '';
+
+            $('#ox1 .o_img').mouseover(function() {
+                imgSrc = $('#ox1 .o_img').attr('src');
+
+                $('#ox1 .o_img').attr('src', '../img/o_o.png');
+            });
+            $('#ox1 .o_img').mouseleave(function() {
+                if ( answer1 == 'o' )
+                    return;
+
+                $('#ox1 .o_img').attr('src', imgSrc);
+            });
+            $('#ox1 .x_img').mouseover(function() {
+                imgSrc = $('#ox1 .x_img').attr('src');
+
+                $('#ox1 .x_img').attr('src', '../img/x_o.png');
+            });
+            $('#ox1 .x_img').mouseleave(function() {
+                if ( answer1 == 'x' )
+                    return;
+
+                $('#ox1 .x_img').attr('src', imgSrc);
+            });
+
+            $('#ox2 .o_img').mouseover(function() {
+                imgSrc = $('#ox2 .o_img').attr('src');
+
+                $('#ox2 .o_img').attr('src', '../img/o_o.png');
+            });
+            $('#ox2 .o_img').mouseleave(function() {
+                if ( answer2 == 'o' )
+                    return;
+
+                $('#ox2 .o_img').attr('src', imgSrc);
+            });
+            $('#ox2 .x_img').mouseover(function() {
+                imgSrc = $('#ox2 .x_img').attr('src');
+
+                $('#ox2 .x_img').attr('src', '../img/x_o.png');
+            });
+            $('#ox2 .x_img').mouseleave(function() {
+                if ( answer2 == 'x' )
+                    return;
+
+                $('#ox2 .x_img').attr('src', imgSrc);
+            });
+
+            $('#ox3 .o_img').mouseover(function() {
+                imgSrc = $('#ox3 .o_img').attr('src');
+
+                $('#ox3 .o_img').attr('src', '../img/o_o.png');
+            });
+            $('#ox3 .o_img').mouseleave(function() {
+                if ( answer3 == 'o' )
+                    return;
+
+                $('#ox3 .o_img').attr('src', imgSrc);
+            });
+            $('#ox3 .x_img').mouseover(function() {
+                imgSrc = $('#ox3 .x_img').attr('src');
+
+                $('#ox3 .x_img').attr('src', '../img/x_o.png');
+            });
+            $('#ox3 .x_img').mouseleave(function() {
+                if ( answer3 == 'x' )
+                    return;
+
+                $('#ox3 .x_img').attr('src', imgSrc);
+            });
+        });
     </script>
 
 </head>

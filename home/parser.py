@@ -60,6 +60,10 @@ def initialize(dict):
     dict['weeknum'] = (lecture - 1) / course.lectureNumbersPerWeek + 1
     dict['lecnum'] = (lecture - 1) % course.lectureNumbersPerWeek + 1
     dict['lecturename'] = lectureName
+    if lecture > 10:
+        dict['lecturenumber'] = str(lecture)
+    else:
+        dict['lecturenumber'] = '0' + str(lecture)
 
 def writeFile(dict, fn):
     global lecture, course
@@ -260,17 +264,17 @@ def parsing8(worksheet, fn="08.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['8problem1'] = worksheet['B1'].value
-    dict['8answer1'] = worksheet['B2'].value
-    dict['8explanation1'] = worksheet['B3'].value
+    dict['8problem1'] = worksheet['B2'].value
+    dict['8answer1'] = worksheet['C2'].value
+    dict['8explanation1'] = worksheet['D2'].value
 
-    dict['8problem2'] = worksheet['B4'].value
-    dict['8answer2'] = worksheet['B5'].value
-    dict['8explanation2'] = worksheet['B6'].value
+    dict['8problem2'] = worksheet['B3'].value
+    dict['8answer2'] = worksheet['C3'].value
+    dict['8explanation2'] = worksheet['D3'].value
 
-    dict['8problem3'] = worksheet['B7'].value
-    dict['8answer3'] = worksheet['B8'].value
-    dict['8explanation3'] = worksheet['B9'].value
+    dict['8problem3'] = worksheet['B4'].value
+    dict['8answer3'] = worksheet['C4'].value
+    dict['8explanation3'] = worksheet['D4'].value
 
     writeFile(dict, fn)
 
@@ -366,9 +370,8 @@ def parsing12_prob(workbook, fn="12_2.html"):
         worksheet = workbook['7_2']
 
     for idx in range(1, 4):
-        cells = []
-        for i in range(1, 7):
-            cells.append('B'+ str((idx-1) * 6 + i))
+        n = idx + 1
+        cells = ['B'+str(n), 'C'+str(n), 'D'+str(n), 'I'+str(n), 'J'+str(n)]
 
         flag = int(worksheet[cells[0]].value)
         dict['12problem' + str(idx)] = str(worksheet[cells[1]].value)
@@ -380,20 +383,19 @@ def parsing12_prob(workbook, fn="12_2.html"):
             dict['12options' + str(idx)] = '<textarea id="answer' + str(idx) + '"' + onchangeFunc + ' class="p12_2_a3" placeholder="이곳에 정답을 입력하세요."></textarea>'
         else: # 객관식
             dict['12flag' + str(idx)] = '1'
-            t = (idx - 1) * 6 + 4
             temp = []
-            temp.append(worksheet['B' + str(t)].value)
-            temp.append(worksheet['C' + str(t)].value)
-            temp.append(worksheet['D' + str(t)].value)
-            temp.append(worksheet['E' + str(t)].value)
+            temp.append(worksheet['E' + str(n)].value)
+            temp.append(worksheet['F' + str(n)].value)
+            temp.append(worksheet['G' + str(n)].value)
+            temp.append(worksheet['H' + str(n)].value)
             for i in range(len(temp)):
                 temp[i] = '<li><a style="cursor:pointer;" class="opt-' + str(i + 1) + '" onclick="changeNum(' + str(idx) + ',' + str(i+1) + ');"' + '>' + '<pre style="overflow-x:hidden;">' + str(i + 1) + ". " + temp[i] + "</pre>" + '</a></li>'
             temp = '<ul class="p12_2_v2">' + ''.join(temp) + '</ul>'
             dict['12options' + str(idx)] = temp
 
-        dict['12answernum' + str(idx)] = str(worksheet[cells[4]].value)
-        dict['12answernum' + str(idx) + '_1'] = str(worksheet[cells[4]].value).split('/')[0]
-        dict['12answer' + str(idx)] = str(worksheet[cells[5]].value)
+        dict['12answernum' + str(idx)] = str(worksheet[cells[3]].value)
+        dict['12answernum' + str(idx) + '_1'] = str(worksheet[cells[3]].value).split('/')[0]
+        dict['12answer' + str(idx)] = str(worksheet[cells[4]].value)
 
     writeFile(dict, fn)
 
