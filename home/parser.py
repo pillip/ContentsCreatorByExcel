@@ -413,7 +413,8 @@ def parsing13(worksheet, fn="13.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['nextlecturename'] = str(worksheet['B1'].value)
+    dict['currlecturename'] = str(worksheet['B1'].value)
+    dict['nextlecturename'] = str(worksheet['B2'].value)
     if int(dict['weeknum']) != 8 and int(dict['weeknum']) != 15 and int(dict['lecnum']) + 1 <= course.lectureNumbersPerWeek:
         dict['nextweeknum'] = dict['weeknum']
         dict['nextlecnum'] = int(dict['lecnum']) + 1
