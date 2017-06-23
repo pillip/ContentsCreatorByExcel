@@ -10,7 +10,8 @@
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
     <script src="../js/printThis.js"></script>
-       <script>
+              <script>
+           var initBody;
         $(function() {
             $('html').keydown(function(e) {
                 var key = e.which;
@@ -28,20 +29,37 @@
             t = t.split(':');
 
             setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
+
+            initBody = document.body.innerHTML;
+
+            var beforePrint = function() {
+                document.body.innerHTML = document.getElementById('print').innerHTML;
+            };
+            var afterPrint = function() {
+                document.body.innerHTML = initBody;
+            };
+
+            if (window.matchMedia) {
+                var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                    if (mql.matches) {
+                        beforePrint();
+                    } else {
+                        afterPrint();
+                    }
+                });
+            }
+
+            window.onbeforeprint = beforePrint;
+            window.onafterprint = afterPrint;
         });
 
         function printDocument()
         {
-            var title = "][coursename][ - ][weeknum][주차 ";
-            title = title + "][lecnum][차시";
-            $('.p10_text').printThis({
-                debug: false,
-                importCSS: true,
-                printContainer: true,
-                loadCSS: "../css/style.css",
-                pageTitle: title,
-                removeinline: false
-            });
+            window.print();
+            var agt = navigator.userAgent.toLowerCase();
+            if (agt.indexOf("safari") != -1)
+                document.body.innerHTML = initBody;
         }
     </script>
 
@@ -103,7 +121,7 @@
 <!-- 내용 -->
 <div class="p10_t">* 이번 시간에 학습한 내용을 다시 한번 정리해 보세요.</div>
 <div class="p10_print" onclick="printDocument();" style="cursor:pointer;"><a>인쇄하기 ▶</a></div>
-<div class="p10_text">
+<div id="print" class="p10_text">
 	][10content][
 </div>
 
