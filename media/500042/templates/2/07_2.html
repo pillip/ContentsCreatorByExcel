@@ -71,6 +71,8 @@
 
             $('#p12_prob_1 .p12_2_next a').text("다음문제");
             $('#p12_prob_1 .p12_2_next').attr('onclick','nextProblem(1,2);');
+
+            $('#answer1').attr('disabled','disabled');
         }
 
         function nextBtn2() {
@@ -118,6 +120,8 @@
 
             $('#p12_prob_2 .p12_2_next a').text("다음문제");
             $('#p12_prob_2 .p12_2_next').attr('onclick','nextProblem(2,3);');
+
+            $('#answer2').attr('disabled','disabled');
         }
 
         function nextBtn3() {
@@ -165,6 +169,8 @@
 
             $('#p12_prob_3 .p12_2_next a').text("결과보기");
             $('#p12_prob_3 .p12_2_next').attr('onclick','nextProblem(3,4);');
+
+            $('#answer3').attr('disabled','disabled');
         }
 
         function changeText(idx, val)
@@ -187,6 +193,9 @@
         {
             if ( idx == 1 )
             {
+                if ( flag1 == false )
+                    return;
+
                 $('#p12_prob_1 .opt-1').css('color',"");
                 $('#p12_prob_1 .opt-2').css('color',"");
                 $('#p12_prob_1 .opt-3').css('color',"");
@@ -197,6 +206,9 @@
             }
             else if ( idx == 2 )
             {
+                if ( flag2 == false )
+                    return;
+
                 $('#p12_prob_2 .opt-1').css('color',"");
                 $('#p12_prob_2 .opt-2').css('color',"");
                 $('#p12_prob_2 .opt-3').css('color',"");
@@ -206,6 +218,9 @@
             }
             else
             {
+                if ( flag3 == false )
+                    return;
+
                 $('#p12_prob_3 .opt-1').css('color',"");
                 $('#p12_prob_3 .opt-2').css('color',"");
                 $('#p12_prob_3 .opt-3').css('color',"");
