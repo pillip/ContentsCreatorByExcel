@@ -87,6 +87,8 @@ def writeFile(dict, fn):
     for line in templateFile:
         if line.find('][') != -1:
             newLine = line.split('][')
+            print line
+            print newLine
             newLine[1] = str(dict[newLine[1]])
 
             if len(newLine) >= 5:
@@ -162,7 +164,9 @@ def parsing3(worksheet, fn="03.html"):
     dict['currpage'] = 3
     dict['time'] = worksheet['D1'].value
 
-    dict['3video'] = worksheet['B1'].value
+    global course
+    dict['3video'] = 'http://down-newkrjobdn.cdn.x-cdn.com/vod/media/2017/' + course.folderName +'/OT.mp4'
+    #worksheet['B1'].value
 
     writeFile(dict, fn)
     writeIncFile(dict, "class.html")
@@ -248,7 +252,17 @@ def parsing7(worksheet, fn="07.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['7video'] = worksheet['B1'].value
+    global course
+    week = int(dict['weeknum'])
+    if week < 10:
+        week = '0' + str(week)
+
+    lec = int(dict['lecnum'])
+    if lec < 10:
+        lec = '0' + str(lec)
+
+    dict['7video'] = 'http://down-newkrjobdn.cdn.x-cdn.com/vod/media/2017/' + course.folderName + '/' + week + '_' + lec + 'g.mp4'
+    #worksheet['B1'].value
 
     writeFile(dict, fn)
 
@@ -290,7 +304,16 @@ def parsing9(worksheet, fn="09.html"):
 
     dict['time'] = worksheet['D1'].value
 
-    dict['9video'] = worksheet['B4'].value
+    global course
+    week = int(dict['weeknum'])
+    if week < 10:
+        week = '0' + str(week)
+
+    lec = int(dict['lecnum'])
+    if lec < 10:
+        lec = '0' + str(lec)
+
+    dict['9video'] = 'http://down-newkrjobdn.cdn.x-cdn.com/vod/media/2017/' + course.folderName + '/' + week + '_' + lec + '.mp4'
 
     temp = str(worksheet['B5'].value).split('\n')
     for idx in range(len(temp)):
