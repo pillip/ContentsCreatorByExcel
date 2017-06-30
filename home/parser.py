@@ -265,15 +265,15 @@ def parsing8(worksheet, fn="08.html"):
     dict['time'] = worksheet['D1'].value
 
     dict['8problem1'] = worksheet['B2'].value
-    dict['8answer1'] = worksheet['C2'].value
+    dict['8answer1'] = str(worksheet['C2'].value).lower()
     dict['8explanation1'] = worksheet['D2'].value
 
     dict['8problem2'] = worksheet['B3'].value
-    dict['8answer2'] = worksheet['C3'].value
+    dict['8answer2'] = str(worksheet['C3'].value).lower()
     dict['8explanation2'] = worksheet['D3'].value
 
     dict['8problem3'] = worksheet['B4'].value
-    dict['8answer3'] = worksheet['C4'].value
+    dict['8answer3'] = str(worksheet['C4'].value).lower()
     dict['8explanation3'] = worksheet['D4'].value
 
     writeFile(dict, fn)
