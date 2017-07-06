@@ -338,7 +338,6 @@ pre {
 /* 8 page */
 #p8 {background:url('../img/1_bg08.jpg') no-repeat;}
 .p8_lay {overflow-y:auto;overflow-x:hidden;width:980px;max-height:530px;margin-left:20px;}
-.p8_lay2 {margin-top:-71px} /* 추가 2017.06.09 JE */
 .p8_q_num {position:relative;top:0px;left:0px;z-index:10;}
 .p8_q_t {font-size:12px;position:relative;top:-60px;left:110px;}
 .p8_q {width:900px;background-color:#4c7eb7;padding:20px 20px 20px 50px;color:#ffffff;font-size:18px;font-weight:600;margin-left:50px;margin-top:-55px;}
@@ -353,7 +352,6 @@ pre {
 .p8_a_t li {float:left;font-size:16px;max-width:740px;padding-left:20px;}
 .p8_a_t li:first-child {width:130px;border-right:1px dotted #cacaca;}
 .p8_a_t li img {width:90px;}
-.p8_ok {z-index:100;position:relative;top:20px;left:0px;width:108px;height:91px;} /* 추가 2017.06.09 JE */
 
 
 /* 9 page */
@@ -419,7 +417,7 @@ pre {
 #p12_2 {background:url('../img/1_bg12_2.jpg') no-repeat;width:1000px;}
 .p12_2_t {font-size:12px;margin:40px auto 0px;width:1000px;text-align:center;}
 .p12_2_lay {width:957px;height:464px;overflow-y:auto;overflow-x:hidden;margin-left:20px;padding:0px 20px;}
-.p12_2_lay2 {margin-top:-71px} /* 추가 2017.06.09 JE */
+
 .p12_2_q {background-color:#e5e5e5;font-size:18px;font-weight:600;width:850px;margin:-20px 0px 0px 20px;padding:15px 20px 15px 30px}
 .p12_2_qi {background:url('../img/12_2_qbg.png') no-repeat;text-align:center;width:135px;height:55px;font-size:30px;font-weight:600;position:relative;top:0px;left:0px;z-index:10;padding-top:5px;}
 .p12_2_v1 {border:1px solid #e5e5e5;width:800px;padding:20px;margin:20px 0px 0px 40px;}
@@ -438,6 +436,10 @@ pre {
 .p12_2_a2 li:first-child {width:120px;text-align:center;font-size:30px;font-weight:600;padding-left:0px;border-right:1px dotted #cacaca;}
 .p12_2_a3 {background-color:#ffffff;padding:15px;width:800px;height:100px;border:1px solid #e5e5e5;margin:20px 0px 20px 40px;}
 
+.p8_lay2 {margin-top:-71px} /* 추가 2017.06.09 JE */
+.p8_ok {z-index:100;position:relative;top:20px;left:0px;width:108px;height:91px;} /* 추가 2017.06.09 JE */
+
+.p12_2_lay2 {margin-top:-71px} /* 추가 2017.06.09 JE */
 .p12_2_ok {z-index:100;top:0px;left:15px;position:relative;display:inline-block;width:108px;height:91px;} /* 추가 2017.06.09 JE */
 
 
