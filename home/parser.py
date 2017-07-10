@@ -236,7 +236,8 @@ def parsing6(worksheet, fn="06.html"):
     else:
         dict['currpage'] = 1
 
-    dict['time'] = worksheet['D1'].value
+    dict['lecturetitle'] = str(worksheet['C1'].value)
+    dict['time'] = worksheet['E1'].value
 
     writeFile(dict, fn)
 
