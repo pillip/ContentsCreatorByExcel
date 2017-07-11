@@ -264,8 +264,8 @@
 
         function wrapWindowByMask(){
             //화면의 높이와 너비를 구한다.
-            var maskHeight = $(document).height();
-            var maskWidth = $(window).width();
+            var maskHeight = $('#p12_2').height();
+            var maskWidth = $('#p12_2').width();
 
             //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
             $('#mask').css({'width':maskWidth,'height':maskHeight});
@@ -291,7 +291,8 @@
         }
     </style>
 </head>
-<body id="p12_2">
+<body>
+<div id="p12_2" style="width:1000px;height:610px;margin:0 auto;position:absolute;top:50%;margin-top:-305px;left:50%;margin-left:-500px;">
 <audio type="audio/mp3" src="../sound/quiz.mp3" autoplay preload="auto"></audio>
 <!-- gnb -->
 <div class="menu2">
@@ -505,6 +506,6 @@
 	<div class="f_next"><a><img src="../img/btn_next.png"></a></div>
 </div>
 
-
+</div>
 </body>
 </html>
