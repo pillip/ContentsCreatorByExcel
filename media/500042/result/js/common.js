@@ -28,7 +28,7 @@ function goPrevPage(curr, max) {
 function goNextPage(curr, max) {
     if ( curr == max )
         alert("마지막 페이지 입니다.");
-    else if ( readyToMove == true )
+    else if ( readyToMove == true || Number(getParam("contentReview")) == 1 )
     {
         var to = curr + 1;
 
