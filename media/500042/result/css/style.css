@@ -11,7 +11,7 @@
 
 /* 초기화 */
 html {overflow-y:scroll}
-body {word-wrap: break-word;}
+body {word-wrap: break-word; background-color:#1a2b45;}
 body,html, h1, h2, h3, h4, h5, h6, form, fieldset, img {margin:0;padding:0;border:0}
 h1, h2, h3, h4, h5, h6 {clear:both}
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block}
@@ -208,7 +208,7 @@ pre {
 
 
 /* footer */
-.footer {width:1000px;height:40px;background-color:#000000;position:absolute;top:610px;left:0px;}
+.footer {width:1000px;height:40px;background-color:#000000;position:absolute;top:610px;margin:0 auto;}
 .f_logo {margin:8px 50px 0 10px;float:left;height:23px;}
 
 .f_search {float:left;width:250px;height:26px;background-color:#fff;border:0px;margin-top:7px;margin-right:50px;}
@@ -260,7 +260,7 @@ pre {
 .p1_ma {margin:0px auto;display:inline-block;}
 .p1_tap_t {background-color:#000;color:#ff9c00;border-radius:5px;text-align:center;padding:3px 20px;font-size:18px;display:inline-block;font-weight:600;float:left;}
 .p1_tit {clear:both;font-size:60px;color:#fff;font-weight:800;max-width:800px;text-shadow:2px 2px 7px black;margin-top:-10px;text-align:left;line-height:1.2}
-.p1_class {display:inline-block;width:1000px;margin-top:50px;font-size:50px;font-weight:600;color:#195990;text-align:center;position:absolute;top:60px;left:0px;} /* 변경 2017.06.09 JE */
+.p1_class {display:inline-block;width:1000px;margin-top:50px;font-size:50px;font-weight:600;color:#195990;text-align:center;position:absolute;top:60px;} /* 변경 2017.06.09 JE */
 .p1_text1 {display:inline-block;width:1000px;font-size:20px;font-weight:600;color:#fff;text-align:center;margin-top:20px;text-shadow:1px 1px 3px #444444;} /* 변경 2017.06.09 JE */
 
 
