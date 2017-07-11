@@ -7,6 +7,13 @@
 <meta name="viewpor​t" content="width-device-width,initial-scale=1, user-scalable=no" /> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<link rel="stylesheet" type="text/css" href="../css/videoplayer.css" />
+<link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
        <script>
@@ -31,7 +38,8 @@
     </script>
 
 </head>
-<body id="p3">
+<body>
+<div id="p3" style="width:1000px;height:610px;margin:0 auto;">
 <!-- gnb -->
 <div class="menu1">
 	<ul>
@@ -101,7 +109,11 @@
 <!-- 내용 -->
 
 <div class="p3_t">* 교수님의 영상을 통하여 본 과목에 대한 내용을 확인해보세요.</div>
-<div class="p3_avi"><video width="800" height="450" src="][3video][" frameborder="0" controls autoplay></video></div>
+<div class="p3_avi">
+    <video id="my-video" class="vjs-default-skin video-js" controls="controls" preload="auto" width="800px" height="450px" data-setup='{"playbackRates": [1, 1.5, 2]}'>
+        <source src="][3video][" type="video/mp4">
+    </video>
+</div>
 
 <!-- 내용 end -->
 
@@ -135,6 +147,6 @@
 	<div class="f_next"><a><img src="../img/btn_next.png"></a></div>
 </div>
 
-
+</div>
 </body>
 </html>
