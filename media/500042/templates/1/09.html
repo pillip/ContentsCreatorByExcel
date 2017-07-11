@@ -7,9 +7,20 @@
 <meta name="viewpor​t" content="width-device-width,initial-scale=1, user-scalable=no" /> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<link rel="stylesheet" type="text/css" href="../css/videoplayer.css" />
+<link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
        <script>
+           var review = Number(getParam("contentReview"));
+           var LTime = getParam("LTime").split(':');
+           var time = Number(LTime[0]) * 3600 + Number(LTime[1]) * 60 + Number(LTime[2]);
+
         $(function() {
             $('html').keydown(function(e) {
                 var key = e.which;
@@ -28,6 +39,47 @@
 
             setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
         });
+
+       $(document).ready(function() {
+            videojs("my-video").ready( function () {
+                if ( review == 0 )
+                {
+                    controlBarDisable();
+
+                    //videojs('my-video').play();
+                    videojs('my-video').currentTime(Number(time));
+                }
+            });
+       });
+
+
+       function controlBarDisable()
+       {
+            var player = videojs('my-video');
+
+            player.controlBar.progressControl.seekBar.off("mousedown");
+            player.controlBar.progressControl.seekBar.off("touchstart");
+            player.controlBar.progressControl.seekBar.off("click");
+       };
+
+       function controlBarEnable()
+       {
+           var player = videojs('my-video');
+
+           player.controlBar.progressControl.seekBar.on("mousedown",  player.controlBar.progressControl.seekBar.handleMouseDown);
+           player.controlBar.progressControl.seekBar.on("touchstart", player.controlBar.progressControl.seekBar.handleMouseDown);
+           player.controlBar.progressControl.seekBar.on("click", player.controlBar.progressControl.seekBar.handleClick);
+       };
+
+       function jump(t)
+       {
+           if ( review == 0 )
+               return;
+
+           var myPlayer = videojs('my-video');
+
+           myPlayer.currentTime(Number(t));
+       };
     </script>
 
 </head>
@@ -107,7 +159,11 @@
 </div>
 
 <!-- 영상 -->
-<div class="p9_avi"><video width="800" height="450" src="][9video][" frameborder="0" controls autoplay></video></div>
+<div class="p9_avi">
+    <video id="my-video" class="vjs-default-skin video-js" controls="controls" preload="auto" width="800px" height="450px" data-setup='{"playbackRates": [1, 1.5, 2]}'>
+        <source src="][9video][" type="video/mp4">
+    </video>
+</div>
 
 <!-- 강의 목차 -->
 <div class="p9_list">

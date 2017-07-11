@@ -317,8 +317,10 @@ def parsing9(worksheet, fn="09.html"):
     dict['9video'] = 'http://down-newkrjobdn.cdn.x-cdn.com/vod/media/2017/' + course.folderName + '/' + week + '_' + lec + '.mp4'
 
     temp = str(worksheet['B5'].value).split('\n')
+    tempTime = str(worksheet['B6'].value).split('\n')
     for idx in range(len(temp)):
-        temp[idx] = '<li>' + temp[idx] + '</li>'
+        t = int(tempTime[idx].split(":")[0]) * 60 + int(tempTime[idx].split(":")[1])
+        temp[idx] = '<li style="cursor:pointer;" onclick="jump(' + str(t) + ');">' + temp[idx] + '</li>'
     temp = ''.join(temp)
     dict['9list'] = temp
 
