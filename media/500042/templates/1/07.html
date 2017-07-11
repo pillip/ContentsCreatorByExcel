@@ -7,6 +7,13 @@
 <meta name="viewpor​t" content="width-device-width,initial-scale=1, user-scalable=no" /> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<link rel="stylesheet" type="text/css" href="../css/videoplayer.css" />
+<link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
        <script>
@@ -99,7 +106,11 @@
 
 
 <!-- 내용 -->
-<div class="p7_avi"><video width="800" height="450" src="][7video][" frameborder="0" controls autoplay></video></div>
+<div class="p7_avi">
+    <video id="my-video" class="vjs-default-skin video-js" controls="controls" preload="auto" width="800px" height="450px" data-setup='{"playbackRates": [1, 1.5, 2]}'>
+        <source src="][7video][" type="video/mp4">
+    </video>
+</div>
 
 
 
