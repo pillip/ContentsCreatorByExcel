@@ -45,6 +45,18 @@ function goNextPage(curr, max) {
     }
 }
 
+function goPage(target) {
+    if ( Number(getParam("contentReview")) == 1 )
+    {
+        var to = target + ".html";
+        location.href = to;
+    }
+    else
+    {
+        alert("수강을 완료한 후에 페이지 이동이 가능합니다.");
+    }
+}
+
 $(document).ready(function() {
     $('.menu_btn').mouseover(function () {
         $('.menu1 ul li ul').css('display', 'block');
