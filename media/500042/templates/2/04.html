@@ -17,9 +17,17 @@
 <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="../js/common.js"></script>
        <script>
-           var review = Number(getParam("contentReview"));
-           var LTime = getParam("LTime").split(':');
-           var time = Number(LTime[0]) * 3600 + Number(LTime[1]) * 60 + Number(LTime[2]);
+           var review, LTime, time;
+           try {
+               review = Number(getParam("contentReview"));
+               LTime = getParam("LTime").split(':');
+               time = Number(LTime[0]) * 3600 + Number(LTime[1]) * 60 + Number(LTime[2]);
+           }
+           catch (err) {
+               review = 0;
+               time = 0;
+           }
+
 
         $(function() {
             $('html').keydown(function(e) {
@@ -33,21 +41,39 @@
                         break;
                 }
             });
-
-            var t = "][time][";
-            t = t.split(':');
-
-            setTimeout("$('.f_next').css('display','block'); changeReadyState();", (Number(t[0]) * 60 + Number(t[1])) * 1000);
         });
 
        $(document).ready(function() {
             videojs("my-video").ready( function () {
+                $('.vjs-big-play-button').css('width','8em');
+                $('.vjs-big-play-button').css('height','4em');
+                $('.vjs-big-play-button').css('line-height','4em');
+                $('.vjs-big-play-button').css('top','166px');
+                $('.vjs-big-play-button').css('left','282px');
+
+                $('.vjs-current-time').css('display','block');
+                $('.vjs-time-divider').css('display','block');
+                $('.vjs-duration').css('display','block');
+                $('.vjs-remaining-time').css('display','none');
+
+                videojs('my-video').on('ended', function() {
+                   $('.f_next').css('display','block');
+                    changeReadyState();
+                });
+
                 if ( review == 0 )
                 {
                     controlBarDisable();
 
                     //videojs('my-video').play();
-                    videojs('my-video').currentTime(Number(time));
+
+                    if ( time > 0 ) {
+                        var text = "전에 보았던 내용입니다. " + getParam("LTime") + "부터 이어서 보겠습니까?\n" + "<확인>을 누르면 이어서 볼 수 있고 <취소" +
+                                ">를 누르면 처음부터 볼 수 있습니다.";
+                        var check = confirm(text);
+                        if ( check )
+                            videojs('my-video').currentTime(Number(time));
+                    }
                 }
             });
        });
@@ -60,6 +86,7 @@
             player.controlBar.progressControl.seekBar.off("mousedown");
             player.controlBar.progressControl.seekBar.off("touchstart");
             player.controlBar.progressControl.seekBar.off("click");
+            $('.vjs-playback-rate').css('display', 'none');
        };
 
        function controlBarEnable()
@@ -74,7 +101,11 @@
        function jump(t)
        {
            if ( review == 0 )
+           {
+               alert("복습모드에서만 사용가능합니다");
                return;
+           }
+
 
            var myPlayer = videojs('my-video');
 
