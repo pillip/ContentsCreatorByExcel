@@ -2,6 +2,7 @@
  * Created by yunpillib on 2017. 6. 4..
  */
 
+var videoAddress = 'http://down-newkrjobdn.cdn.x-cdn.com/vod/media/2017/';
 var readyToMove = false;
 
 function changeReadyState()

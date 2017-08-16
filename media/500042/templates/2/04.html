@@ -45,6 +45,8 @@
 
        $(document).ready(function() {
             videojs("my-video").ready( function () {
+                var temp = videojs("my-video").src().split('//')[1].split('/');
+                videojs('my-video').src(videoAddress + temp[5] + '/' + temp[6]);
                 $('.vjs-big-play-button').css('width','8em');
                 $('.vjs-big-play-button').css('height','4em');
                 $('.vjs-big-play-button').css('line-height','4em');
