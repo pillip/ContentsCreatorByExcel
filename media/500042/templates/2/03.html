@@ -145,6 +145,37 @@
             }
         }
 
+        function resetProblem()
+        {
+            $('#p8').css('background','url("../img/1_bg08.jpg") no-repeat');
+            $('#p8').css('width','1000px');
+
+            $('#p12_prob_4').css('display','none');
+            $('#ox1').css('display','block');
+
+            $('#ox1 .p8_ans').css('display','none');
+            $('#ox1 .p8_a_t').css('display','none');
+            $('#ox2 .p8_ans').css('display','none');
+            $('#ox2 .p8_a_t').css('display','none');
+            $('#ox3 .p8_ans').css('display','none');
+            $('#ox3 .p8_a_t').css('display','none');
+
+            $('#ox1 .p8_ok img').attr('src','');
+            $('#ox2 .p8_ok img').attr('src','');
+            $('#ox3 .p8_ok img').attr('src','');
+
+            $('#ox1 .o_img').attr('src','../img/o.png');
+            $('#ox1 .x_img').attr('src','../img/x.png');
+            $('#ox2 .o_img').attr('src','../img/o.png');
+            $('#ox2 .x_img').attr('src','../img/x.png');
+            $('#ox3 .o_img').attr('src','../img/o.png');
+            $('#ox3 .x_img').attr('src','../img/x.png');
+
+            src1 = src2 = src3 = '';
+            answer1 = answer2 = answer3 = '';
+            flag1 = flag2 = flag3 = true;
+        }
+
       $(document).ready(function() {
         var imgSrc = '';
 
@@ -298,9 +329,9 @@
             <ul>
                 <li><img src="../img/][8answer1][_o.png"></li>
                             <li><pre>][8explanation1][</pre>
-                    <div class="p8_green01" style="cursor:pointer;" onclick="nextProblem(1,2);"><a>다음문제 ▶</a></div>
                 </li>
             </ul>
+            <div class="p8_green01" style="cursor:pointer;" onclick="nextProblem(1,2);"><a>다음문제 ▶</a></div>
         </div>
     </div>
 </div>
@@ -327,9 +358,9 @@
             <ul>
                 <li><img src="../img/][8answer2][_o.png"></li>
                             <li><pre>][8explanation2][</pre>
-                    <div class="p8_green01" style="cursor:pointer;" onclick="nextProblem(2,3);"><a>다음문제 ▶</a></div>
                 </li>
             </ul>
+            <div class="p8_green01" style="cursor:pointer;position:absolute;right:40;bottom:30;" onclick="nextProblem(2,3);"><a>다음문제 ▶</a></div>
         </div>
     </div>
 </div>
@@ -356,9 +387,9 @@
             <ul>
                 <li><img src="../img/][8answer3][_o.png"></li>
                             <li><pre>][8explanation3][</pre>
-                    <div class="p8_green01" style="cursor:pointer;" onclick="nextProblem(3,4);"><a>결과보기 ▶</a></div>
                 </li>
             </ul>
+            <div class="p8_green01" style="cursor:pointer;position:absolute;right:40;bottom:30;" onclick="nextProblem(3,4);"><a>결과보기 ▶</a></div>
         </div>
     </div>
 </div>
@@ -380,10 +411,9 @@
                 <span>Q3</span>
             </div>
         </div>
-        <div class="p12_4_btn"><a href="03.html"><img src="../img/btn_replay.png"></a></div>
+        <div class="p12_4_btn"><a style="cursor:pointer;" onclick="resetProblem();"><img src="../img/btn_replay.png"></a></div>
     </div>
 <!-- 내용 end -->
-
 
 <!-- footer -->
 <div class="footer">

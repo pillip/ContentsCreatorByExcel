@@ -262,6 +262,55 @@
             }
         }
 
+        function resetProblem() {
+            $('#p12_2').css('background','url("../img/1_bg12_2.jpg") no-repeat');
+            $('#p12_2').css('width','1000px');
+
+            $('#p12_prob_4').css('display','none');
+            $('#p12_prob_1').css('display','block');
+
+            $('#p12_prob_1 .p12_2_ai').css('display','none');
+            $('#p12_prob_1 .p12_2_a1').css('display','none');
+            $('#p12_prob_1 .p12_2_a2').css('display','none');
+            $('#p12_prob_2 .p12_2_ai').css('display','none');
+            $('#p12_prob_2 .p12_2_a1').css('display','none');
+            $('#p12_prob_2 .p12_2_a2').css('display','none');
+            $('#p12_prob_3 .p12_2_ai').css('display','none');
+            $('#p12_prob_3 .p12_2_a1').css('display','none');
+            $('#p12_prob_3 .p12_2_a2').css('display','none');
+
+            $('#p12_prob_1 .p12_2_ok img').attr('src','');
+            $('#p12_prob_2 .p12_2_ok img').attr('src','');
+            $('#p12_prob_3 .p12_2_ok img').attr('src','');
+
+            $('#p12_prob_1 .opt-1').css('color',"");
+            $('#p12_prob_1 .opt-2').css('color',"");
+            $('#p12_prob_1 .opt-3').css('color',"");
+            $('#p12_prob_1 .opt-4').css('color',"");
+
+            $('#p12_prob_2 .opt-1').css('color',"");
+            $('#p12_prob_2 .opt-2').css('color',"");
+            $('#p12_prob_2 .opt-3').css('color',"");
+            $('#p12_prob_2 .opt-4').css('color',"");
+
+            $('#p12_prob_3 .opt-1').css('color',"");
+            $('#p12_prob_3 .opt-2').css('color',"");
+            $('#p12_prob_3 .opt-3').css('color',"");
+            $('#p12_prob_3 .opt-4').css('color',"");
+
+            $('#p12_prob_1 .p12_2_next a').text("정답확인");
+            $('#p12_prob_1 .p12_2_next').attr('onclick','nextBtn1();');
+            $('#p12_prob_2 .p12_2_next a').text("정답확인");
+            $('#p12_prob_2 .p12_2_next').attr('onclick','nextBtn1();');
+            $('#p12_prob_3 .p12_2_next a').text("정답확인");
+            $('#p12_prob_3 .p12_2_next').attr('onclick','nextBtn1();');
+
+            src1 = src2 = src3 = '';
+            answer1 = answer2 = answer3 = '';
+            count1 = count2 = count3 = 0;
+            flag1 = flag2 = flag3 = true;
+        }
+
         function wrapWindowByMask(){
             //화면의 높이와 너비를 구한다.
             var maskHeight = $('#p12_2').height();
@@ -485,7 +534,7 @@
                 <span>Q3</span>
             </div>
         </div>
-        <div class="p12_4_btn" onclick="location.href='12.html';" style="cursor: pointer;"><a><img src="../img/btn_replay.png"></a></div>
+        <div class="p12_4_btn" onclick="resetProblem();" style="cursor: pointer;"><a><img src="../img/btn_replay.png"></a></div>
     </div>
 
 <!-- 내용 end -->
