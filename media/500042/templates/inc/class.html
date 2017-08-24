@@ -8,6 +8,32 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 
+<link rel="stylesheet" type="text/css" href="../css/videoplayer.css" />
+<link href="http://vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+    $(document).ready(function() {
+            videojs("my-video").ready( function () {
+                var temp = videojs("my-video").src().split('//')[1].split('/');
+                videojs('my-video').src(videoAddress + temp[5] + '/' + temp[6]);
+                $('.vjs-big-play-button').css('width','8em');
+                $('.vjs-big-play-button').css('height','4em');
+                $('.vjs-big-play-button').css('line-height','4em');
+                $('.vjs-big-play-button').css('top','166px');
+                $('.vjs-big-play-button').css('left','282px');
+
+                $('.vjs-current-time').css('display','block');
+                $('.vjs-time-divider').css('display','block');
+                $('.vjs-duration').css('display','block');
+                $('.vjs-remaining-time').css('display','none');
+            });
+       });
+</script>
 </head>
 <body>
 <!-- 내용 -->
