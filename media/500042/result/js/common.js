@@ -72,6 +72,9 @@ $(document).ready(function() {
         $('.menu2 ul li ul').css('display', 'none');
     });
 
+    $('.menu1 dd a').css('cursor','pointer');
+    $('.menu2 dd a').css('cursor','pointer');
+
     $('.f_s_btn a img').click(function () {
         var searchText = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&ie=utf8&query=' + escape($('#search').val());
 
@@ -81,6 +84,8 @@ $(document).ready(function() {
 
 var getParam = function(key){
         var _parammap = {};
+        _parammap["contentReview"] = 1;
+        _parammap["LTime"] = "0:0:7";
         document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
             function decode(s) {
                 return decodeURIComponent(s.split("+").join(" "));
