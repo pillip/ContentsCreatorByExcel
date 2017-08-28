@@ -13,7 +13,7 @@
         $(function() {
              //changeReadyState();
 
-            if ( '][12example1][' == 'None' )
+            if ( $('#example1 pre').text() == 'None' )
                 $('#example1').css('display','none');
         });
     </script>
@@ -233,11 +233,12 @@
 
         function nextProblem(curr, next)
         {
-            if ( '][12example2][' == 'None' )
+            if ( $('#example2 pre').text() == 'None' )
                 $('#example2').css('display','none');
 
-            if ( '][12example3][' == 'None' )
+            if ( $('#example3 pre').text() == 'None' )
                 $('#example3').css('display','none');
+
 
             if ( next == 4 )
             {
@@ -304,6 +305,10 @@
             $('#p12_prob_2 .p12_2_next').attr('onclick','nextBtn1();');
             $('#p12_prob_3 .p12_2_next a').text("정답확인");
             $('#p12_prob_3 .p12_2_next').attr('onclick','nextBtn1();');
+
+            $('#answer1').removeAttr('disabled');
+            $('#answer2').removeAttr('disabled');
+            $('#answer3').removeAttr('disabled');
 
             src1 = src2 = src3 = '';
             answer1 = answer2 = answer3 = '';
