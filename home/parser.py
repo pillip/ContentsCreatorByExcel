@@ -87,8 +87,6 @@ def writeFile(dict, fn):
     for line in templateFile:
         if line.find('][') != -1:
             newLine = line.split('][')
-            print line
-            print newLine
             newLine[1] = str(dict[newLine[1]])
 
             if len(newLine) >= 5:
@@ -257,11 +255,16 @@ def parsing7(worksheet, fn="07.html"):
     week = int(dict['weeknum'])
     if week < 10:
         week = '0' + str(week)
+    else:
+        week = str(week)
 
     lec = int(dict['lecnum'])
     if lec < 10:
         lec = '0' + str(lec)
+    else:
+        lec = str(lec)
 
+    print week, lec
     dict['7video'] = course.folderName + '/' + week + '_' + lec + 'g.mp4'
     #worksheet['B1'].value
 
@@ -309,10 +312,14 @@ def parsing9(worksheet, fn="09.html"):
     week = int(dict['weeknum'])
     if week < 10:
         week = '0' + str(week)
+    else:
+        week = str(week)
 
     lec = int(dict['lecnum'])
     if lec < 10:
         lec = '0' + str(lec)
+    else:
+        lec = str(lec)
 
     dict['9video'] =  course.folderName + '/' + week + '_' + lec + '.mp4'
 
