@@ -76,9 +76,9 @@ $(document).ready(function() {
     $('.menu2 dd a').css('cursor','pointer');
 
     $('.f_s_btn a img').click(function () {
-        var searchText = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&ie=utf8&query=' + escape($('#search').val());
+        var searchText = 'https://search.naver.com/search.naver?where=nexearch&sm=tab_jum&ie=utf8&query=' + $('#search').val();
 
-        window.open(searchText);
+        window.open(encodeURI(searchText));
     });
 });
 
