@@ -163,7 +163,7 @@ def parsing3(worksheet, fn="03.html"):
     dict['time'] = worksheet['D1'].value
 
     global course
-    dict['3video'] = course.folderName +'/OT.mp4'
+    dict['3video'] = 'OT.mp4'
     #worksheet['B1'].value
 
     writeFile(dict, fn)
@@ -265,7 +265,7 @@ def parsing7(worksheet, fn="07.html"):
         lec = str(lec)
 
     print week, lec
-    dict['7video'] = course.folderName + '/' + week + '_' + lec + 'g.mp4'
+    dict['7video'] = week + '_' + lec + 'g.mp4'
     #worksheet['B1'].value
 
     writeFile(dict, fn)
@@ -321,7 +321,7 @@ def parsing9(worksheet, fn="09.html"):
     else:
         lec = str(lec)
 
-    dict['9video'] =  course.folderName + '/' + week + '_' + lec + '.mp4'
+    dict['9video'] =  week + '_' + lec + '.mp4'
 
     temp = str(worksheet['B5'].value).split('\n')
     tempTime = str(worksheet['B6'].value).split('\n')
